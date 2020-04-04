@@ -15,9 +15,9 @@ export class MapaDeGoogleComponent implements OnInit {
 
 
 
-   mapClicked()
+   mapClicked(e)
    {
-     
+
    }
 
   constructor() { }
