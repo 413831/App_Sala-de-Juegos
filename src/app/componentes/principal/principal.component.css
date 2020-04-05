@@ -1,6 +1,7 @@
 .imagenDeMenu{
-width: 80px;
-height: 70px;
+  width: 80px;
+  height: 70px;
+  margin: 5px 20px 5px 5px;
 }
 
 .hero-text {
@@ -10,4 +11,23 @@ height: 70px;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #100000;
-    }
+    padding: 15px 15px 15px 15px;
+}
+
+
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+list-group-item:hover{
+  background-color: white;
+}
+
+.panel
+{
+    background-image: url("/assets/imagenes/background.png");
+    background-color: #1a1a1a;
+    background-size: cover;
+    width: 100%;
+}
