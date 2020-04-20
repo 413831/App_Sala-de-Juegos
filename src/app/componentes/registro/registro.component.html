@@ -7,31 +7,66 @@
    
   </div>
   <strong><p>No leer lo anterior, es solo un ejemplo sacado de https://www.argentina.gob.ar/terminos-y-condiciones </p></strong>
-  <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Acepto</button>
-  <button  class="cancelbtn"  routerLink="/Principal" style="width:auto;">No acepto</button>
-  <div id="id01" class="modal">
-    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
-    <form class="modal-content animate" >
-      <div class="container">
-        <label><b>Email</b></label>
-        <input type="text" placeholder="Ingresa tu correo" name="email" required>
-  
-        <label><b>Clave</b></label>
-        <input type="password" placeholder="Aca la clave" name="psw" required>
-  
-        <label><b>Repita la clave</b></label>
-        <input type="password" placeholder="Aca repeti la misa clave  de arriba" name="psw-repeat" required>
-        <input type="checkbox" checked="checked">Recordar mis datos
-        <p>creando la cuenta aceptando los<a  onclick="document.getElementById('id01').style.display='none'"  >Terminos y condiciones</a>.</p>
-  
-        <div class="clearfix">
-          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Me arrepenti</button>
-          <button type="submit" class="signupbtn">Registrarme</button>
+    <div class="col d-flex justify-content-center">
+      <button class="btn-lg btn-success" data-toggle="modal" data-target="#exampleModalCenter">Acepto</button>
+      <button class="btn-lg btn-danger"  routerLink="/Principal">No acepto</button>
+    </div>
+    
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content bg-dark text-light">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Ingreso de usuario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          
+          <div class="form-group ">
+            <label for="email"><b>Email</b></label>
+            <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="clave"><b>Clave</b></label>
+            <input type="password" class="form-control" id="email" placeholder="Ingresa tu clave" name="psw" required>
+          </div>
+          <div class="form-group">          
+            <input type="password" class="form-control" id="email" placeholder="Re-ingresa tu clave" name="psw-repeat" required>
+          </div>
+          
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Recordar mis datos</span>
+            </div>
+            <div class="input-group-text">
+              <input type="checkbox" >
+            </div>
+          </div>
+          
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Acepta terminos y condiciones</span>
+            </div>
+            <div class="input-group-text">
+              <input type="checkbox" id="chkTerminos">
+            </div>
+          </div>
         </div>
       </div>
-    </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">¡Sí señor!</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">¡No quiero!</button>
+      </div>
+    </div>
   </div>
-  
+</div>
+    
+    
+    
+
   <script>
   // Get the modal
   var modal = document.getElementById('id01');
