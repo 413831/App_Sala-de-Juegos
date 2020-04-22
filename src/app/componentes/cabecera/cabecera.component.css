@@ -8,6 +8,9 @@
     position: relative;
 }
 
+.panel img{
+  opacity: 0.2;
+}
 
 .hero-text{
 text-align: center;

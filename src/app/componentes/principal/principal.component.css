@@ -2,6 +2,7 @@
   width: 80px;
   height: 70px;
   margin: 5px 20px 5px 5px;
+  opacity: 1;
 }
 
 .hero-text {
@@ -20,10 +21,6 @@ a:hover {
   color: black;
 }
 
-list-group-item:hover{
-  background-color: white;
-}
-
 .panel
 {
     background-image: url("/assets/imagenes/background.png");
@@ -31,3 +28,4 @@ list-group-item:hover{
     background-size: cover;
     width: 100%;
 }
+
