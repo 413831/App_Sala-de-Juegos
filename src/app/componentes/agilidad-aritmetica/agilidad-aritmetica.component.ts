@@ -16,36 +16,37 @@ export class AgilidadAritmeticaComponent implements OnInit {
   Tiempo: number;
   repetidor:any;
   private subscription: Subscription;
+
   ngOnInit() {
   }
-   constructor() {
-     this.ocultarVerificar=true;
-     this.Tiempo=5;
+
+  constructor() {
+    this.ocultarVerificar=true;
+    this.Tiempo = 5;
     this.nuevoJuego = new JuegoAgilidad();
     console.info("Inicio agilidad");
   }
+
   NuevoJuego() {
     this.ocultarVerificar=false;
-   this.repetidor = setInterval(()=>{
+    this.repetidor = setInterval(()=>{
 
       this.Tiempo--;
       console.log("llego", this.Tiempo);
-      if(this.Tiempo==0 ) {
-        clearInterval(this.repetidor);
-        this.verificar();
-        this.ocultarVerificar=true;
-        this.Tiempo=5;
-      }
+        if(this.Tiempo==0) {
+          clearInterval(this.repetidor);
+          this.verificar();
+          this.ocultarVerificar=true;
+          this.Tiempo=5;
+        }
       }, 900);
-
   }
+
   verificar()
   {
+    // Llamar a metodo verificar de JuegoAgilidad
+    console.log("verificar");
     this.ocultarVerificar=false;
     clearInterval(this.repetidor);
-
-
-
   }
-
 }
