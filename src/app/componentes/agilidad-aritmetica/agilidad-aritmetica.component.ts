@@ -27,6 +27,7 @@ export class AgilidadAritmeticaComponent implements OnInit {
     this.ocultarVerificar=true;
     this.Tiempo = 20;
     this.nuevoJuego = new JuegoAgilidad();
+    this.nuevoJuego.jugador = this.jugador.nombre;
     console.info("Inicio agilidad");
   }
 

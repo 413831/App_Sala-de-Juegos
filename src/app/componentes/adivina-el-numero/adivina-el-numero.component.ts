@@ -1,6 +1,7 @@
 
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { JuegoAdivina } from '../../clases/juego-adivina'
+import { Jugador } from '../../clases/jugador';
 
 @Component({
   selector: 'app-adivina-el-numero',
@@ -10,7 +11,7 @@ import { JuegoAdivina } from '../../clases/juego-adivina'
 
 export class AdivinaElNumeroComponent implements OnInit {
   @Output() enviarJuego: EventEmitter<any> = new EventEmitter<any>();
-
+  @Input() jugador: Jugador;
   nuevoJuego: JuegoAdivina;
   Mensajes: string;
   contador: number;
@@ -18,6 +19,7 @@ export class AdivinaElNumeroComponent implements OnInit {
 
   constructor() {
     this.nuevoJuego = new JuegoAdivina();
+    this.nuevoJuego.jugador = this.jugador.nombre;
     console.info("numero Secreto:", this.nuevoJuego.numeroSecreto);
     this.ocultarVerificar = false;
   }

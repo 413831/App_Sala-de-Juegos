@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { JuegoPiedraPapelTijera } from '../../clases/juego-piedra-papel-tijera';
+import { Jugador } from '../../clases/jugador';
 
 @Component({
   selector: 'app-piedra-papel-tijera',
@@ -8,12 +9,14 @@ import { JuegoPiedraPapelTijera } from '../../clases/juego-piedra-papel-tijera';
 })
 export class PiedraPapelTijeraComponent implements OnInit {
   @Output() enviarJuego: EventEmitter<any> = new EventEmitter<any>();
-  nuevoJuevo: JuegoPiedraPapelTijera;
+  @Input() jugador: Jugador;
+  nuevoJuego: JuegoPiedraPapelTijera;
   mensaje: String; 
 
 
   constructor() {
-    this.nuevoJuevo = new JuegoPiedraPapelTijera();
+    this.nuevoJuego = new JuegoPiedraPapelTijera();
+    this.nuevoJuego.jugador = this.jugador.nombre;
     console.info("Inicio piedra, papel o tijera");
   }
 
