@@ -3,30 +3,29 @@ import { Juego } from '../clases/juego';
 export class JuegoAgilidad extends Juego{
   numeroIngresado: number = 0;
   primerNumero: number = 0;
-  operador: String = '-';
+  operador: String = '';
   segundoNumero: number = 0;
   resultado: number = 0;
-  gano: boolean = false;
 
   constructor(nombre?: string, gano?: boolean, jugador?:string) 
   {
-      super("Agilidad con aritmetica",gano,jugador);  
+      super("Agilidad con aritmetica",gano,jugador);        
   }
 
   public verificar(): boolean {
-    if (this.numeroIngresado == this.numeroSecreto) 
-        {
-          this.gano = true;
-        }
+    if (this.numeroIngresado == this.resultado) 
+    {
+      this.gano = true;
+    }
 
-        if (this.gano) 
-        {
-          return true;
-        }
-        else
-        {
-          return false;
-        }
+    if (this.gano) 
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
   }
 
   public generar() 

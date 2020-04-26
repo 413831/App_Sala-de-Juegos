@@ -37,6 +37,12 @@ export class AdivinaElNumeroComponent implements OnInit {
       this.MostarMensaje("Sos un Genio!!!", true);
       this.nuevoJuego.numeroSecreto = 0;
     }
+    else if(this.contador === 10)
+    {
+      this.enviarJuego.emit(this.nuevoJuego);
+      this.MostarMensaje("Perdiste campeón...");
+      this.nuevoJuego.numeroSecreto = 0;
+    }
     else 
     {
       let mensaje: string;
