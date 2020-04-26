@@ -2,6 +2,7 @@ import { Component, OnInit ,Input,Output,EventEmitter} from '@angular/core';
 import { JuegoAgilidad } from '../../clases/juego-agilidad'
 
 import {Subscription, VirtualTimeScheduler} from "rxjs";
+import { Jugador } from '../../clases/jugador';
 
 @Component({
   selector: 'app-agilidad-aritmetica',
@@ -9,7 +10,8 @@ import {Subscription, VirtualTimeScheduler} from "rxjs";
   styleUrls: ['./agilidad-aritmetica.component.css']
 })
 export class AgilidadAritmeticaComponent implements OnInit {
-   @Output()
+  @Input() jugador: Jugador;
+  @Output()
   enviarJuego :EventEmitter<any>= new EventEmitter<any>();
   nuevoJuego : JuegoAgilidad;
   mensaje: String; 

@@ -13,7 +13,6 @@ export class PiedraPapelTijeraComponent implements OnInit {
   nuevoJuego: JuegoPiedraPapelTijera;
   mensaje: String; 
 
-
   constructor() {
     this.nuevoJuego = new JuegoPiedraPapelTijera();
     this.nuevoJuego.jugador = this.jugador.nombre;
