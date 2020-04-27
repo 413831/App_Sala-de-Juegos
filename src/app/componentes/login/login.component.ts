@@ -2,14 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import {Subscription, BehaviorSubject} from "rxjs";
+import { JugadoresService } from '../../servicios/jugadores.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  private servicio: JugadoresService;
   private subscription: Subscription;
+  email = '';
   usuario = '';
   clave= '';
   progreso: number;
@@ -19,22 +22,34 @@ export class LoginComponent implements OnInit {
 
   clase="progress-bar progress-bar-info progress-bar-striped ";
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router) {
+  constructor( private route: ActivatedRoute, private router: Router) {
       this.progreso=0;
       this.ProgresoDeAncho="0%";
-
   }
 
   ngOnInit() {
   }
 
   Entrar() {
-    if (this.usuario === 'admin' && this.clave === 'admin') {
+    if(this.servicio.traerLocal().find( jugador => {
+        return jugador.email === this.email && jugador.clave === this.clave;
+        }))
+    {
+      console.info("Sesion iniciada");
       this.router.navigate(['/Principal']);
     }
+    else
+    {
+      console.info("Usuario no encontrado");
+    }
+
+    // if (this.usuario === 'admin' && this.clave === 'admin') {
+    //   this.router.navigate(['/Principal']);
+    // }
   }
+
+
+
   MoverBarraDeProgreso() {
 
     this.logeando=false;
@@ -75,7 +90,7 @@ export class LoginComponent implements OnInit {
           break;
       }
     });
-    //this.logeando=true;
+    this.logeando=true;
   }
 
 }

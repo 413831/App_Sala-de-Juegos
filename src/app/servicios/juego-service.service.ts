@@ -5,10 +5,11 @@ import { MiHttpService } from './mi-http/mi-http.service';
 
 @Injectable()
 export class JuegoServiceService {
-
+  juegos: Juego[];
   peticion:any;
   constructor( public miHttp: MiHttpService ) {
-    this.peticion = this.miHttp.httpGetO("http://localhost:3003");
+    localStorage.setItem("info-juegos",JSON.stringify(this.juegos));
+    //this.peticion = this.miHttp.httpGetO("http://localhost:3003");
 //    this.peticion = this.miHttp.httpGetO("https://restcountries.eu/rest/v2/all");
   }
 
