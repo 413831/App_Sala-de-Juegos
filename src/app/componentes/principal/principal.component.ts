@@ -22,7 +22,7 @@ export class PrincipalComponent implements OnInit {
 
     if(!localStorage.getItem("juegos"))
     {
-      let juegos: Juego[] = new Array<Juegos>(); 
+      let juegos: Juego[] = new Array<Juego>(); 
       localStorage.setItem("juegos",JSON.stringify(juegos));
     }
 
