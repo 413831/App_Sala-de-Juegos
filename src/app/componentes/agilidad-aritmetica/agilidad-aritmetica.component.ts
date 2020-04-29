@@ -10,7 +10,7 @@ import { Jugador } from '../../clases/jugador';
   styleUrls: ['./agilidad-aritmetica.component.css']
 })
 export class AgilidadAritmeticaComponent implements OnInit {
-  @Input() jugador: Jugador;
+  //@Input() jugador: Jugador;
   @Output()
   enviarJuego :EventEmitter<any>= new EventEmitter<any>();
   nuevoJuego : JuegoAgilidad;
@@ -29,7 +29,7 @@ export class AgilidadAritmeticaComponent implements OnInit {
     this.ocultarVerificar=true;
     this.Tiempo = 20;
     this.nuevoJuego = new JuegoAgilidad();
-    this.nuevoJuego.jugador = this.jugador.nombre;
+    //this.nuevoJuego.jugador = this.jugador.nombre;
     console.info("Inicio agilidad");
   }
 

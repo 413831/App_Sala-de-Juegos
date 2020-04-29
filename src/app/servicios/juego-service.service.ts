@@ -3,18 +3,25 @@ import { Juego } from '../clases/juego';
 import { JuegoAdivina } from '../clases/juego-adivina';
 import { MiHttpService } from './mi-http/mi-http.service';
 
+import { environment } from '../../environments/environment';
+import { JuegoAnagrama } from '../clases/juego-anagrama';
+import { JuegoAgilidad } from '../clases/juego-agilidad';
+import { JuegoPiedraPapelTijera } from '../clases/juego-piedra-papel-tijera';
+
 @Injectable()
 export class JuegoServiceService {
+  urlJuego = '';
   juegos: Juego[];
   peticion:any;
-  constructor( public miHttp: MiHttpService ) {
+  
+  constructor( private http: MiHttpService ) {
     localStorage.setItem("info-juegos",JSON.stringify(this.juegos));
-    //this.peticion = this.miHttp.httpGetO("http://localhost:3003");
-//    this.peticion = this.miHttp.httpGetO("https://restcountries.eu/rest/v2/all");
+    //this.peticion = this.http.httpGetO("http://localhost:3003");
+    // this.peticion = this.miHttp.httpGetO("https://restcountries.eu/rest/v2/all");
   }
 
   public listar(): Array<Juego> {
-   this.miHttp.httpGetP("https://restcountries.eu/rest/v2/all")
+   this.http.httpGetP("https://restcountries.eu/rest/v2/all")
     .then( data => {
       console.log( data );
     })
@@ -22,22 +29,21 @@ export class JuegoServiceService {
       console.log( err );
     });
 
-
     this.peticion
     .subscribe( data => {
       console.log("En listar");
       console.log( data );
     }, err => {
       console.info("error: " ,err );
-    })
+    });
 
     let miArray: Array<Juego> = new Array<Juego>();
 
     miArray.push(new JuegoAdivina("Juego 1", false));
     miArray.push(new JuegoAdivina("Pepe", true));
-    miArray.push(new JuegoAdivina("Juego 3", false));
+    miArray.push(new JuegoPiedraPapelTijera("Juego 3", false));
     miArray.push(new JuegoAdivina("Juego 4", false));
-    miArray.push(new JuegoAdivina("Juego 5", false));
+    miArray.push(new JuegoPiedraPapelTijera("Juego 5", false));
     miArray.push(new JuegoAdivina("Juego 6", false));
     return miArray;
   }
@@ -54,9 +60,9 @@ export class JuegoServiceService {
       let miArray: Array<Juego> = new Array<Juego>();
       miArray.push(new JuegoAdivina("JuegoPromesa 1", false,"promesa"));
       miArray.push(new JuegoAdivina("PepePromesa", true));
-      miArray.push(new JuegoAdivina("JuegoPromesa 3", false));
-      miArray.push(new JuegoAdivina("JuegoPromesa 4", false));
-      miArray.push(new JuegoAdivina("JuegoPromesa 5", false));
+      miArray.push(new JuegoPiedraPapelTijera("JuegoPromesa 3", false));
+      miArray.push(new JuegoAgilidad("JuegoPromesa 4", false));
+      miArray.push(new JuegoAgilidad("JuegoPromesa 5", false));
       miArray.push(new JuegoAdivina("JuegoPromesa 6", false));
       resolve(miArray);
     });

@@ -55,6 +55,8 @@ import { InputJugadoresComponent } from './componentes/input-jugadores/input-jug
 import { SexoPipe } from './pipes/sexo.pipe';
 import { PiedraPapelTijeraComponent } from './componentes/piedra-papel-tijera/piedra-papel-tijera.component';
 
+import { firebase } from '../firebase/firebase';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,4 +99,6 @@ import { PiedraPapelTijeraComponent } from './componentes/piedra-papel-tijera/pi
   providers: [ JuegoServiceService, MiHttpService,PaisesService,ArchivosJugadoresService,JugadoresService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  
+}

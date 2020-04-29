@@ -9,9 +9,7 @@ export class ArchivosJugadoresService {
   constructor(public miHttp: MiHttpService) {
   }
 
-
   public traerJugadores(ruta) {
-    
     return this.miHttp.httpGetO(this.api + ruta)
       .toPromise()
       .then(data => {

@@ -1,1 +1,47 @@
-<p>piedra-papel-tijera works!</p>
+<div class="container border-light rounded-pill">
+    <div class="row border border-dark rounded-pill">
+        <div class="col d-flex justify-content-center">
+            <button class="btn btn-primary ">
+                <img class="imagenJuego" src="/assets/imagenes/piedra.jpg" (click)='eligePiedra()'>
+            </button>
+        </div>
+        <div class="col d-flex justify-content-center">
+            <button class="btn btn-primary ">
+                <img class="imagenJuego" src="/assets/imagenes/papel.jpg" (click)='eligePapel()'>
+            </button>
+        </div>
+        <div class="col d-flex justify-content-center">
+            <button class="btn btn-primary ">
+                <img class="imagenJuego" src="/assets/imagenes/tijera.jpg" (click)='eligeTijera()'>
+            </button>
+        </div>
+    </div>
+    <div class="row border border-dark rounded-pill">
+        <div class="col d-flex justify-content-center">
+            <div *ngIf='finJuego'>
+                <div *ngIf='nuevoJuego.gano'>
+                    <h1>{{jugador.nombre}}<span class="badge badge-success"> GANASTE! </span></h1>
+                </div>
+                <div *ngIf='!nuevoJuego.gano'>
+                    <h1>{{jugador.nombre}}<span class="badge badge-secondary"> Perdiste... </span></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row border border-dark rounded-pill">
+        <div class="col d-flex justify-content-center">
+            <img class="imagenJuego" [hidden]='finJuego' src="/assets/imagenes/incognita.jpg" alt="">
+            <div [hidden]='!finJuego'>
+                <div *ngIf='nuevoJuego.opcionRival === 1'>
+                    <img class="imagenJuego" src="/assets/imagenes/piedra.jpg">
+                </div>
+                <div *ngIf='nuevoJuego.opcionRival === 2'>
+                    <img class="imagenJuego" src="/assets/imagenes/papel.jpg">
+                </div>
+                <div *ngIf='nuevoJuego.opcionRival === 3'>
+                    <img class="imagenJuego" src="/assets/imagenes/tijera.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

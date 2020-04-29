@@ -3,6 +3,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import {Subscription, BehaviorSubject} from "rxjs";
 import { JugadoresService } from '../../servicios/jugadores.service';
+import { Jugador } from '../../clases/jugador';
+import { ArchivosJugadoresService } from '../../servicios/archivos-jugadores.service';
 
 @Component({
   selector: 'app-login',
@@ -10,11 +12,10 @@ import { JugadoresService } from '../../servicios/jugadores.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  private http: ArchivosJugadoresService;
   private servicio: JugadoresService;
   private subscription: Subscription;
-  email = '';
-  usuario = '';
-  clave= '';
+  public jugador: Jugador;
   progreso: number;
   progresoMensaje="esperando...";
   logeando=true;
@@ -23,7 +24,9 @@ export class LoginComponent implements OnInit {
   clase="progress-bar progress-bar-info progress-bar-striped ";
 
   constructor( private route: ActivatedRoute, private router: Router) {
-      this.progreso=0;
+      this.servicio = new JugadoresService(this.http);
+      this.jugador = new Jugador();
+      this.progreso = 0;
       this.ProgresoDeAncho="0%";
   }
 
@@ -31,9 +34,8 @@ export class LoginComponent implements OnInit {
   }
 
   Entrar() {
-    if(this.servicio.traerLocal().find( jugador => {
-        return jugador.email === this.email && jugador.clave === this.clave;
-        }))
+    if(this.existeJugador(this.jugador) || 
+      (this.jugador.email === 'admin' && this.jugador.clave === 'admin'))
     {
       console.info("Sesion iniciada");
       this.router.navigate(['/Principal']);
@@ -42,13 +44,18 @@ export class LoginComponent implements OnInit {
     {
       console.info("Usuario no encontrado");
     }
-
-    // if (this.usuario === 'admin' && this.clave === 'admin') {
-    //   this.router.navigate(['/Principal']);
-    // }
   }
 
-
+  existeJugador(jugador: Jugador) : boolean
+  {
+    if(this.servicio.traerLocal().find( datos => {
+      return datos.email === this.jugador.email && datos.clave === this.jugador.clave;
+      }))
+    {
+      return true;
+    }
+    return false;
+  }
 
   MoverBarraDeProgreso() {
 

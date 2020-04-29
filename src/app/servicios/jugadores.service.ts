@@ -6,58 +6,55 @@ import { Jugador } from '../clases/jugador';
 
 @Injectable()
 export class JugadoresService {
-  jugadores: Jugador[];
+  jugadores: Jugador[] = [];
   private url;
   peticion: any;
   filtrado: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private miHttp: ArchivosJugadoresService) {
     localStorage.setItem("jugadores",JSON.stringify(this.jugadores));
-    //public miHttp: ArchivosJugadoresService
     //this.peticion = this.miHttp.traerJugadores();
     //    this.peticion = this.miHttp.httpGetO("https://restcountries.eu/rest/v2/all");
   }
 
-  traerLocal() : Jugador[]
+  public traerLocal() : Jugador[]
   {
-    return this.jugadores = JSON.parse(localStorage.getItem("productos"));
+    console.info("GET localstorage");
+    return this.jugadores = JSON.parse(localStorage.getItem("jugadores"));
   }
 
-  guardarLocal(jugador: Jugador)
+  public guardarLocal(jugador: Jugador)
   {
-    this.jugadores = [];
+    this.jugadores = new Array<Jugador>();
     this.jugadores = this.traerLocal();
     this.jugadores.push(jugador);
     localStorage.setItem("jugadores",JSON.stringify(this.jugadores));
+    
   }
 
 
-  traertodos() {
-    return this.http.get(this.url);
+  public traertodos(ruta: string, filtro: string) {
+    return this.miHttp.traerJugadores(ruta).then(data => {
+      console.info("jugadores service", data);
+
+      this.filtrado = data;
+
+      let ganador: boolean;
+      if (filtro == "ganadores") {
+        ganador = true;
+      }
+      else {
+        ganador = false;
+      }
+
+      this.filtrado = this.filtrado.filter(
+        data => data.gano === ganador || filtro == "todos"); return this.filtrado
+       }
+    )
+      .catch(error => {
+        console.log("error")
+        return this.filtrado;
+      });
   }
-
-  // traertodos(ruta: string, filtro: string) {
-  //   return this.miHttp.traerJugadores(ruta).then(data => {
-  //     console.info("jugadores service", data);
-
-  //     this.filtrado = data;
-
-  //     let ganador: boolean;
-  //     if (filtro == "ganadores") {
-  //       ganador = true;
-  //     }
-  //     else {
-  //       ganador = false;
-  //     }
-
-  //     this.filtrado = this.filtrado.filter(
-  //       data => data.gano === ganador || filtro == "todos"); return this.filtrado
-  //      }
-  //   )
-  //     .catch(error => {
-  //       console.log("error")
-  //       return this.filtrado;
-  //     });
-  // }
 
 }
