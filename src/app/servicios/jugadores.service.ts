@@ -43,7 +43,25 @@ export class JugadoresService {
   public traerActual()
   {
     let jugador: Jugador = new Jugador();
-    jugador.nombre = JSON.parse(localStorage.getItem("jugadorActual")).nombre;
+    let data;
+    data = JSON.parse(localStorage.getItem("jugadorActual"));
+
+    jugador.nombre = data.nombre;
+    jugador.email = data.email;
+    jugador.jugados = data.jugados;
+    jugador.ganados = data.ganados;
+    jugador.perdidos = data.perdidos;
+
+    return jugador;
+  }
+
+  public actualizarActual(jugador: Jugador)
+  {
+    let jugadores: Jugador[] = new Array<Jugador>();
+    jugadores = this.traerLocal().filter( data => data.email != jugador.email);
+    jugadores.push(jugador);
+    localStorage.setItem("archivoJugadores",JSON.stringify(jugadores));
+    localStorage.setItem("jugadorActual",JSON.stringify(jugador));
   }
 
   public traertodos(ruta: string, filtro: string) {

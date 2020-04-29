@@ -8,11 +8,9 @@ import { ArchivosJugadoresService } from '../../servicios/archivos-jugadores.ser
   styleUrls: ['./jugadores-listado.component.css']
 })
 export class JugadoresListadoComponent implements OnInit {
-  jugadores: any
-  miJugadoresServicio: JugadoresService
+  jugadores: any;
 
-  constructor(serviceJugadores: JugadoresService) {
-    this.miJugadoresServicio = serviceJugadores;
+  constructor(private miJugadoresServicio: JugadoresService) {
   }
 
   ngOnInit() {
@@ -33,6 +31,8 @@ export class JugadoresListadoComponent implements OnInit {
     //   this.jugadores = data;
 
     // })
+    this.jugadores=this.miJugadoresServicio.traerLocal().
+    filter( jugador => jugador.ganados > jugador.perdidos);
   }
   TraerPerdedores() {
     // this.miJugadoresServicio.traertodos('jugadores/','perdedores').then(data=>{
@@ -40,6 +40,8 @@ export class JugadoresListadoComponent implements OnInit {
     //   this.jugadores = data;
 
     // })
+    this.jugadores=this.miJugadoresServicio.traerLocal().
+    filter( jugador => jugador.ganados < jugador.perdidos);
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { JuegoPiedraPapelTijera } from '../../clases/juego-piedra-papel-tijera';
 import { Jugador } from '../../clases/jugador';
+import { JugadoresService } from '../../servicios/jugadores.service';
 
 @Component({
   selector: 'app-piedra-papel-tijera',
@@ -13,11 +14,12 @@ export class PiedraPapelTijeraComponent implements OnInit {
   nuevoJuego: JuegoPiedraPapelTijera;
   mensaje: String; 
   finJuego: boolean;
-  jugadorDummy: Jugador; 
+  jugador: Jugador; 
 
-  constructor() {
+  constructor(private miJugadoresServicio: JugadoresService) {
+    this.jugador = this.miJugadoresServicio.traerActual();
     this.nuevoJuego = new JuegoPiedraPapelTijera();
-    this.jugadorDummy = new Jugador()
+    this.nuevoJuego.jugador = this.jugador.nombre;
     //this.nuevoJuego.jugador = this.jugador.nombre;
     console.info("Inicio piedra, papel o tijera");
   }
@@ -26,26 +28,43 @@ export class PiedraPapelTijeraComponent implements OnInit {
     this.finJuego = false;
   }
 
-  verificar()
+  generar()
   {
-    this.nuevoJuego.verificar();
+    this.jugador.jugados += 1;
+    this.nuevoJuego.generar();
+  }
+
+  verificar()
+  {    
+    if(this.nuevoJuego.verificar())
+    {
+      this.jugador.ganados += 1;
+    }
+    else
+    {
+      this.jugador.perdidos += 1;
+    }
+    this.miJugadoresServicio.actualizarActual(this.jugador);
     this.finJuego = true;
   }
 
   eligePiedra()
   {
+    this.nuevoJuego.generar();
     this.nuevoJuego.opcionIngresada = 1;
     this.verificar();
   }
-
+  
   eligePapel()
   {
+    this.nuevoJuego.generar();
     this.nuevoJuego.opcionIngresada = 2;
     this.verificar();
   }
-
+  
   eligeTijera()
   {
+    this.nuevoJuego.generar();
     this.nuevoJuego.opcionIngresada = 3;
     this.verificar();
   }

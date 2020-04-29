@@ -25,11 +25,11 @@ export class JuegoPiedraPapelTijera extends Juego {
 
         if (this.gano) 
         {
-        return true;
+         return true;
         }
         else
         {
-        return false;
+         return false;
         }
     }
 

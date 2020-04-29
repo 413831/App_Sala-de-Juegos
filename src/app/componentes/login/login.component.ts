@@ -34,11 +34,13 @@ export class LoginComponent implements OnInit {
   }
 
   Entrar() {
-    if(this.existeJugador(this.jugador) || 
+    let jugador = this.existeJugador(this.jugador);
+
+    if(jugador  || 
       (this.jugador.email === 'admin' && this.jugador.clave === 'admin'))
     {
       console.info("Sesion iniciada");
-      this.servicio.iniciarSesion(this.jugador);
+      this.servicio.iniciarSesion(jugador);
       this.router.navigate(['/Principal']);
     }
     else
@@ -47,15 +49,17 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  existeJugador(jugador: Jugador) : boolean
+  existeJugador(jugador: Jugador)
   {
-    if(this.servicio.traerLocal().find( datos => {
+    let data = this.servicio.traerLocal().find( datos => {
       return datos.email === this.jugador.email && datos.clave === this.jugador.clave;
-      }))
+      });
+
+    if(data != null)
     {
-      return true;
+      return data;
     }
-    return false;
+    return null;
   }
 
   MoverBarraDeProgreso() {

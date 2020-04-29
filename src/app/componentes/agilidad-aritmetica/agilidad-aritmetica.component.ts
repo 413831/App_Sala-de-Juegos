@@ -3,6 +3,7 @@ import { JuegoAgilidad } from '../../clases/juego-agilidad'
 
 import {Subscription, VirtualTimeScheduler} from "rxjs";
 import { Jugador } from '../../clases/jugador';
+import { JugadoresService } from '../../servicios/jugadores.service';
 
 @Component({
   selector: 'app-agilidad-aritmetica',
@@ -14,6 +15,7 @@ export class AgilidadAritmeticaComponent implements OnInit {
   @Output()
   enviarJuego :EventEmitter<any>= new EventEmitter<any>();
   nuevoJuego : JuegoAgilidad;
+  jugador: Jugador;
   mensaje: String; 
   ocultarVerificar: boolean;
   Tiempo: number;
@@ -23,9 +25,10 @@ export class AgilidadAritmeticaComponent implements OnInit {
   private subscription: Subscription;
 
   ngOnInit() {
+    this.jugador = this.miJugadoresServicio.traerActual();
   }
 
-  constructor() {
+  constructor(private miJugadoresServicio: JugadoresService) {
     this.ocultarVerificar=true;
     this.Tiempo = 20;
     this.nuevoJuego = new JuegoAgilidad();
@@ -35,7 +38,10 @@ export class AgilidadAritmeticaComponent implements OnInit {
 
   NuevoJuego() {
     this.jugo = false;
+    this.nuevoJuego = new JuegoAgilidad();
+    this.nuevoJuego.nombre = this.jugador.nombre;
     this.nuevoJuego.generar();
+    this.jugador.jugados += 1;
     this.ocultarVerificar=false;
     this.repetidor = setInterval(()=>{
 
@@ -60,6 +66,7 @@ export class AgilidadAritmeticaComponent implements OnInit {
       this.enviarJuego.emit(this.nuevoJuego);
       this.mensaje = 'Buenardo!';
       this.ocultarVerificar=true;
+      this.jugador.ganados += 1;
       //this.MostarMensaje("Sos un Genio!!!", true);
     }
     else 
@@ -67,11 +74,12 @@ export class AgilidadAritmeticaComponent implements OnInit {
       this.enviarJuego.emit(this.nuevoJuego);
       this.mensaje = 'Malardo...';
       this.ocultarVerificar=true;
+      this.jugador.perdidos += 1;
       //this.MostarMensaje("Perdiste campeón...");
     }
     
     console.info("Resultado:", this.nuevoJuego.resultado);
-
+    this.miJugadoresServicio.actualizarActual(this.jugador);
     clearInterval(this.repetidor);
   }
 
