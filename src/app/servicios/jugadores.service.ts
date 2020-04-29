@@ -12,7 +12,6 @@ export class JugadoresService {
   filtrado: any;
 
   constructor(private miHttp: ArchivosJugadoresService) {
-    localStorage.setItem("jugadores",JSON.stringify(this.jugadores));
     //this.peticion = this.miHttp.traerJugadores();
     //    this.peticion = this.miHttp.httpGetO("https://restcountries.eu/rest/v2/all");
   }
@@ -20,7 +19,7 @@ export class JugadoresService {
   public traerLocal() : Jugador[]
   {
     console.info("GET localstorage");
-    return this.jugadores = JSON.parse(localStorage.getItem("jugadores"));
+    return this.jugadores = JSON.parse(localStorage.getItem("archivoJugadores"));
   }
 
   public guardarLocal(jugador: Jugador)
@@ -28,10 +27,24 @@ export class JugadoresService {
     this.jugadores = new Array<Jugador>();
     this.jugadores = this.traerLocal();
     this.jugadores.push(jugador);
-    localStorage.setItem("jugadores",JSON.stringify(this.jugadores));
-    
+    localStorage.setItem("archivoJugadores",JSON.stringify(this.jugadores)); 
   }
 
+  public iniciarSesion(jugador: Jugador)
+  {
+    localStorage.setItem("jugadorActual",JSON.stringify(jugador));    
+  }
+
+  public cerrarSesion(jugador: Jugador)
+  {
+    localStorage.removeItem("jugadorActual");    
+  }
+
+  public traerActual()
+  {
+    let jugador: Jugador = new Jugador();
+    jugador.nombre = JSON.parse(localStorage.getItem("jugadorActual")).nombre;
+  }
 
   public traertodos(ruta: string, filtro: string) {
     return this.miHttp.traerJugadores(ruta).then(data => {

@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
       (this.jugador.email === 'admin' && this.jugador.clave === 'admin'))
     {
       console.info("Sesion iniciada");
+      this.servicio.iniciarSesion(this.jugador);
       this.router.navigate(['/Principal']);
     }
     else
