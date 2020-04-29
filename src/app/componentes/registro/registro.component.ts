@@ -80,6 +80,10 @@ export class RegistroComponent implements OnInit {
     {
       if(this.validarOpciones()){
         console.info("Alta de usuario");
+        this.jugador.ganados = 0;
+        this.jugador.pais = '';
+        this.jugador.jugados = 0;
+        this.jugador.perdidos = 0;
         this.servicio.guardarLocal(this.jugador);
         this.existe = false;
         this.router.navigate(['/Principal']);

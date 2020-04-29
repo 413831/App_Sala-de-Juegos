@@ -16,13 +16,13 @@ export class PrincipalComponent implements OnInit {
     // Set local storage 
     if(!localStorage.getItem("archivoJugadores"))
     {
-      let jugadores: Jugador[] = [];
+      let jugadores: Jugador[] = new Array<Jugador>();
       localStorage.setItem("archivoJugadores",JSON.stringify(jugadores));
     }
 
     if(!localStorage.getItem("juegos"))
     {
-      let juegos: Juego[] = []; 
+      let juegos: Juego[] = new Array<Juegos>(); 
       localStorage.setItem("juegos",JSON.stringify(juegos));
     }
 

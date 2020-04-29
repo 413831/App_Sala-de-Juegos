@@ -19,26 +19,27 @@ export class JugadoresListadoComponent implements OnInit {
   }
 
   TraerTodos() {
-    console.info("Traer todos");
-    this.miJugadoresServicio.traertodos('jugadores/','todos').then(data=>{
-      console.info("jugadores listado",(data));
-      this.jugadores= data;
+    // console.info("Traer todos");
+    // this.miJugadoresServicio.traertodos('jugadores/','todos').then(data=>{
+    //   console.info("jugadores listado",(data));
+    //   this.jugadores= data;
 
-    })
+    // })
+    this.jugadores=this.miJugadoresServicio.traerLocal();
   }
   TraerGanadores() {
-    this.miJugadoresServicio.traertodos('jugadores/','ganadores').then(data=>{
-      console.info("jugadores listado",(data));
-      this.jugadores = data;
+    // this.miJugadoresServicio.traertodos('jugadores/','ganadores').then(data=>{
+    //   console.info("jugadores listado",(data));
+    //   this.jugadores = data;
 
-    })
+    // })
   }
   TraerPerdedores() {
-    this.miJugadoresServicio.traertodos('jugadores/','perdedores').then(data=>{
-      console.info("jugadores listado",(data));
-      this.jugadores = data;
+    // this.miJugadoresServicio.traertodos('jugadores/','perdedores').then(data=>{
+    //   console.info("jugadores listado",(data));
+    //   this.jugadores = data;
 
-    })
+    // })
   }
 
 }
