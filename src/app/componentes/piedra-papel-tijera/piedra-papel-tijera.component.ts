@@ -50,7 +50,7 @@ export class PiedraPapelTijeraComponent implements OnInit {
     }
     this.miJugadoresServicio.actualizarActual(this.jugador); 
     this.juegoServicio.guardar(this.nuevoJuego);
-    this.finJuego = true;gi
+    this.finJuego = true;
   }
 
   eligePiedra()
