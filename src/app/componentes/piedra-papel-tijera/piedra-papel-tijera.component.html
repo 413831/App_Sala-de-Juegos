@@ -25,6 +25,9 @@
                 <div *ngIf='!nuevoJuego.gano'>
                     <h1><span class="badge badge-secondary">{{jugador.nombre}} Perdiste... </span></h1>
                 </div>
+                <div *ngIf='empate'>
+                    <h1><span class="badge badge-warning">{{jugador.nombre}} Empataste </span></h1>
+                </div>
                 <div>
                     <h1><button class="btn-lg btn-warning btn-block" (click)='finJuego = !finJuego'>Jugar de nuevo</button></h1>
                 </div>

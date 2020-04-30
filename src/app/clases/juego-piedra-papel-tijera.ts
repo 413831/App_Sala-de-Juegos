@@ -22,6 +22,10 @@ export class JuegoPiedraPapelTijera extends Juego {
         {   // Tijera
             this.gano = true;
         }
+        else if(this.opcionIngresada && this.opcionRival)
+        {
+            this.gano = false;
+        }
 
         if (this.gano) 
         {

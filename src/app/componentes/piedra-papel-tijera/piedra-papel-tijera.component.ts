@@ -16,12 +16,14 @@ export class PiedraPapelTijeraComponent implements OnInit {
   mensaje: String; 
   finJuego: boolean;
   jugador: Jugador; 
+  empate: Boolean;
 
   constructor(private miJugadoresServicio: JugadoresService, 
             private juegoServicio: JuegoServiceService) {
     this.jugador = this.miJugadoresServicio.traerActual();
     this.nuevoJuego = new JuegoPiedraPapelTijera();
     this.nuevoJuego.jugador = this.jugador.nombre;
+    this.empate = false;
     //this.nuevoJuego.jugador = this.jugador.nombre;
     console.info("Inicio piedra, papel o tijera");
   }
@@ -43,7 +45,11 @@ export class PiedraPapelTijeraComponent implements OnInit {
       this.jugador.ganados += 1;
       this.nuevoJuego.gano = true;
     }
-    else
+    else if(this.nuevoJuego.opcionIngresada === this.nuevoJuego.opcionRival)
+    {
+      this.empate = true;
+    }
+    else 
     {
       this.jugador.perdidos += 1;
       this.nuevoJuego.gano = false;
