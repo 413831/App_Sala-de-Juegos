@@ -86,7 +86,7 @@ export class RegistroComponent implements OnInit {
         this.servicio.guardar(this.jugador);
         this.existe = false;
         this.servicio.getJugadores();
-        this.router.navigate(['/Principal']);
+        this.router.navigate(['/']);
       }
     }
     else{
