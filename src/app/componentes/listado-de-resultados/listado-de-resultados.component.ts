@@ -1,5 +1,6 @@
 
 import { Component, OnInit , Input, EventEmitter} from '@angular/core';
+import { JuegoServiceService } from '../../servicios/juego-service.service';
 
 @Component({
   selector: 'app-listado-de-resultados',
@@ -10,8 +11,7 @@ export class ListadoDeResultadosComponent implements OnInit {
  @Input()
  listado: Array<any>;
 
-
-  constructor() {
+  constructor(private juegoService: JuegoServiceService) {
    }
 
   ngOnInit() {
@@ -19,6 +19,7 @@ export class ListadoDeResultadosComponent implements OnInit {
   }
 
   ver() {
+    this.listado = this.juegoService.traerLocal();
     console.info(this.listado);
   }
 

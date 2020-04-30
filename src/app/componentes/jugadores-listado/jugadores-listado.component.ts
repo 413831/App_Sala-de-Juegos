@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JugadoresService } from '../../servicios/jugadores.service';
 import { ArchivosJugadoresService } from '../../servicios/archivos-jugadores.service';
+import { Jugador } from '../../clases/jugador';
 
 @Component({
   selector: 'app-jugadores-listado',
@@ -8,7 +9,7 @@ import { ArchivosJugadoresService } from '../../servicios/archivos-jugadores.ser
   styleUrls: ['./jugadores-listado.component.css']
 })
 export class JugadoresListadoComponent implements OnInit {
-  jugadores: any;
+  jugadores: Jugador[] = [];
 
   constructor(private miJugadoresServicio: JugadoresService) {
   }
@@ -17,31 +18,33 @@ export class JugadoresListadoComponent implements OnInit {
   }
 
   TraerTodos() {
-    // console.info("Traer todos");
-    // this.miJugadoresServicio.traertodos('jugadores/','todos').then(data=>{
-    //   console.info("jugadores listado",(data));
-    //   this.jugadores= data;
-
-    // })
+    console.info("Traer todos");
+    // this.miJugadoresServicio.getJugadores('archivoJugadores.json')
+    //                         .subscribe((response: Jugador[]) => {
+    //   console.info("jugadores service", response);
+    //     this.jugadores = response;     
+      
+    //   }, error => console.log("error" + error));
+    
+    // console.info("Array"+this.jugadores);
     this.jugadores=this.miJugadoresServicio.traerLocal();
   }
   TraerGanadores() {
-    // this.miJugadoresServicio.traertodos('jugadores/','ganadores').then(data=>{
-    //   console.info("jugadores listado",(data));
-    //   this.jugadores = data;
-
-    // })
-    this.jugadores=this.miJugadoresServicio.traerLocal().
-    filter( jugador => jugador.ganados > jugador.perdidos);
+    console.info("Traer ganadores");
+    // this.miJugadoresServicio.getJugadores('archivoJugadores.json')
+    //                         .subscribe((response: Jugador[]) => {
+    //   console.info("jugadores service", response);
+    //    this.jugadores = response.filter( jugador => jugador.ganados > jugador.perdidos);                 
+    //   }, error => console.log("error" + error));
+    this.jugadores=this.miJugadoresServicio.traerLocal().filter(jugador => jugador.ganados > jugador.perdidos);
   }
   TraerPerdedores() {
-    // this.miJugadoresServicio.traertodos('jugadores/','perdedores').then(data=>{
-    //   console.info("jugadores listado",(data));
-    //   this.jugadores = data;
-
-    // })
-    this.jugadores=this.miJugadoresServicio.traerLocal().
-    filter( jugador => jugador.ganados < jugador.perdidos);
+    console.info("Traer perdedores");
+    // this.miJugadoresServicio.getJugadores('archivoJugadores.json')
+    //                         .subscribe((response: Jugador[]) => {
+    //   console.info("jugadores service", response);
+    //    this.jugadores = response.filter( jugador => jugador.ganados < jugador.perdidos);                   
+    //   }, error => console.log("error" + error));
+    this.jugadores=this.miJugadoresServicio.traerLocal().filter(jugador => jugador.ganados < jugador.perdidos);;
   }
-
 }

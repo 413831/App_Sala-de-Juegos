@@ -12,7 +12,6 @@ export class MiHttpService {
 
   public httpGetPromise(url: string, objeto:any){
 
-
     return this.http
     .get(url)
     .toPromise()

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Jugador } from '../../clases/jugador';
 import { Juego } from '../../clases/juego';
+import { JugadoresService } from '../../servicios/jugadores.service';
+import { JuegoServiceService } from '../../servicios/juego-service.service';
 
 @Component({
   selector: 'app-principal',
@@ -12,18 +14,17 @@ export class PrincipalComponent implements OnInit {
     isFirstOpen: true,
     isFirstDisabled: false
   };
-  constructor() {
+
+  constructor(private jugadorService: JugadoresService, private juegoService: JuegoServiceService) {
     // Set local storage 
     if(!localStorage.getItem("archivoJugadores"))
     {
-      let jugadores: Jugador[] = new Array<Jugador>();
-      localStorage.setItem("archivoJugadores",JSON.stringify(jugadores));
+      this.jugadorService.getJugadores();
     }
 
-    if(!localStorage.getItem("juegos"))
+    if(!localStorage.getItem("info-juegos"))
     {
-      let juegos: Juego[] = new Array<Juego>(); 
-      localStorage.setItem("juegos",JSON.stringify(juegos));
+      this.juegoService.getJuegos();
     }
 
     if(!localStorage.getItem("jugadorActual"))

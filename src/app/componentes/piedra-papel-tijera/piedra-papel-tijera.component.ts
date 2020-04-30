@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { JuegoPiedraPapelTijera } from '../../clases/juego-piedra-papel-tijera';
 import { Jugador } from '../../clases/jugador';
 import { JugadoresService } from '../../servicios/jugadores.service';
+import { JuegoServiceService } from '../../servicios/juego-service.service';
 
 @Component({
   selector: 'app-piedra-papel-tijera',
@@ -16,7 +17,8 @@ export class PiedraPapelTijeraComponent implements OnInit {
   finJuego: boolean;
   jugador: Jugador; 
 
-  constructor(private miJugadoresServicio: JugadoresService) {
+  constructor(private miJugadoresServicio: JugadoresService, 
+            private juegoServicio: JuegoServiceService) {
     this.jugador = this.miJugadoresServicio.traerActual();
     this.nuevoJuego = new JuegoPiedraPapelTijera();
     this.nuevoJuego.jugador = this.jugador.nombre;
@@ -39,12 +41,15 @@ export class PiedraPapelTijeraComponent implements OnInit {
     if(this.nuevoJuego.verificar())
     {
       this.jugador.ganados += 1;
+      this.nuevoJuego.gano = true;
     }
     else
     {
       this.jugador.perdidos += 1;
+      this.nuevoJuego.gano = false;
     }
-    this.miJugadoresServicio.actualizarActual(this.jugador);
+    this.miJugadoresServicio.actualizarActual(this.jugador); 
+    this.juegoServicio.guardar(this.nuevoJuego);
     this.finJuego = true;
   }
 

@@ -5,6 +5,7 @@ import {Subscription, BehaviorSubject} from "rxjs";
 import { JugadoresService } from '../../servicios/jugadores.service';
 import { Jugador } from '../../clases/jugador';
 import { ArchivosJugadoresService } from '../../servicios/archivos-jugadores.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { ArchivosJugadoresService } from '../../servicios/archivos-jugadores.ser
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  private http: ArchivosJugadoresService;
+  private http: HttpClient;
   private servicio: JugadoresService;
   private subscription: Subscription;
   public jugador: Jugador;

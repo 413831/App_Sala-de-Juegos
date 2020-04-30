@@ -3,6 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { JuegoAdivina } from '../../clases/juego-adivina'
 import { Jugador } from '../../clases/jugador';
 import { JugadoresService } from '../../servicios/jugadores.service';
+import { JuegoServiceService } from '../../servicios/juego-service.service';
 
 @Component({
   selector: 'app-adivina-el-numero',
@@ -17,8 +18,10 @@ export class AdivinaElNumeroComponent implements OnInit {
   Mensajes: string;
   contador: number;
   ocultarVerificar: boolean;
+  vida: number;
 
-  constructor(private miJugadoresServicio: JugadoresService) {
+  constructor(private miJugadoresServicio: JugadoresService, 
+              private juegosService: JuegoServiceService) {
   }
 
   ngOnInit() {
@@ -33,6 +36,7 @@ export class AdivinaElNumeroComponent implements OnInit {
     this.jugador.jugados += 1;
     this.nuevoJuego.generarnumero();
     this.contador = 0;
+    this.vida = 100;
   }
 
   verificar() {
@@ -40,19 +44,24 @@ export class AdivinaElNumeroComponent implements OnInit {
     this.ocultarVerificar = true;
     if (this.nuevoJuego.verificar()) 
     {
-      this.enviarJuego.emit(this.nuevoJuego);
       this.MostarMensaje("Sos un Genio!!!", true);
       this.nuevoJuego.numeroSecreto = 0;
 
       this.jugador.ganados += 1;
+      this.nuevoJuego.gano = true;
+      this.enviarJuego.emit(this.nuevoJuego);
+      this.juegosService.guardar(this.nuevoJuego);
     }
     else if(this.contador === 10)
     {
-      this.enviarJuego.emit(this.nuevoJuego);
+      this.vida = 0;
       this.MostarMensaje("Perdiste campeón...");
       this.nuevoJuego.numeroSecreto = 0;
 
       this.jugador.perdidos += 1;
+      this.nuevoJuego.gano = false;
+      this.enviarJuego.emit(this.nuevoJuego);
+      this.juegosService.guardar(this.nuevoJuego);
     }
     else 
     {
@@ -60,31 +69,37 @@ export class AdivinaElNumeroComponent implements OnInit {
       switch (this.contador) {
         case 1:
           mensaje = "No, intento fallido, animo";
+          this.vida = 90;
           break;
         case 2:
           mensaje = "No,Te estaras Acercando???";
+          this.vida = 80;
           break;
         case 3:
           mensaje = "No es, Yo crei que la tercera era la vencida.";
+          this.vida = 70;
           break;
         case 4:
           mensaje = "No era el  " + this.nuevoJuego.numeroIngresado;
+          this.vida = 55;
           break;
         case 5:
           mensaje = " intentos y nada.";
+          this.vida = 45;
           break;
         case 6:
           mensaje = "Afortunado en el amor";
+          this.vida = 25;
           break;
         default:
           mensaje = "Ya le erraste " + this.contador + " veces";
+          this.vida = 10;
           break;
       }
       this.MostarMensaje("#" + this.contador + " " + mensaje + " ayuda :" + this.nuevoJuego.retornarAyuda());
     }
     console.info("numero Secreto:", this.nuevoJuego.gano);
     this.miJugadoresServicio.actualizarActual(this.jugador);
-    this.enviarJuego.emit(this.nuevoJuego);
   }
 
   MostarMensaje(mensaje: string = "este es el mensaje", ganador: boolean = false)

@@ -4,6 +4,7 @@ import { JuegoAgilidad } from '../../clases/juego-agilidad'
 import {Subscription, VirtualTimeScheduler} from "rxjs";
 import { Jugador } from '../../clases/jugador';
 import { JugadoresService } from '../../servicios/jugadores.service';
+import { JuegoServiceService } from '../../servicios/juego-service.service';
 
 @Component({
   selector: 'app-agilidad-aritmetica',
@@ -24,17 +25,20 @@ export class AgilidadAritmeticaComponent implements OnInit {
   jugo: Boolean;
   private subscription: Subscription;
 
-  ngOnInit() {
-    this.jugador = this.miJugadoresServicio.traerActual();
-  }
-
-  constructor(private miJugadoresServicio: JugadoresService) {
+  
+  constructor(private miJugadoresServicio: JugadoresService, 
+              private juegoService: JuegoServiceService) {
     this.ocultarVerificar=true;
     this.Tiempo = 20;
     this.nuevoJuego = new JuegoAgilidad();
     //this.nuevoJuego.jugador = this.jugador.nombre;
     console.info("Inicio agilidad");
   }
+
+  ngOnInit() {
+    this.jugador = this.miJugadoresServicio.traerActual();
+  }
+
 
   NuevoJuego() {
     this.jugo = false;
@@ -67,6 +71,7 @@ export class AgilidadAritmeticaComponent implements OnInit {
       this.mensaje = 'Buenardo!';
       this.ocultarVerificar=true;
       this.jugador.ganados += 1;
+      this.nuevoJuego.gano = true;
       //this.MostarMensaje("Sos un Genio!!!", true);
     }
     else 
@@ -75,11 +80,14 @@ export class AgilidadAritmeticaComponent implements OnInit {
       this.mensaje = 'Malardo...';
       this.ocultarVerificar=true;
       this.jugador.perdidos += 1;
+      this.nuevoJuego.gano = false;
       //this.MostarMensaje("Perdiste campeón...");
     }
     
     console.info("Resultado:", this.nuevoJuego.resultado);
     this.miJugadoresServicio.actualizarActual(this.jugador);
+    this.enviarJuego.emit(this.nuevoJuego);
+    this.juegoService.guardar(this.nuevoJuego);
     clearInterval(this.repetidor);
   }
 

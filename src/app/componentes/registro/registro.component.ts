@@ -5,6 +5,7 @@ import { JugadoresService } from '../../servicios/jugadores.service';
 import { JuegoServiceService } from '../../servicios/juego-service.service';
 import { MiHttpService } from '../../servicios/mi-http/mi-http.service';
 import { ArchivosJugadoresService } from '../../servicios/archivos-jugadores.service';
+import { HttpClient } from '@angular/common/http';
 
 //para poder hacer las validaciones
 //import { Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
@@ -13,10 +14,8 @@ import { ArchivosJugadoresService } from '../../servicios/archivos-jugadores.ser
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
-export class RegistroComponent implements OnInit {
-  private http: ArchivosJugadoresService;
+export class RegistroComponent implements OnInit {  
   jugador: Jugador;
-  servicio: JugadoresService;
   existe: Boolean;
   checkTerminos: Boolean;
   patternMail: RegExp;
@@ -27,10 +26,10 @@ export class RegistroComponent implements OnInit {
   formRegistro:FormGroup=this.miConstructor.group({
     usuario:this.email
   });*/
-  constructor( private route: ActivatedRoute, private router: Router) { 
-    this.servicio = new JugadoresService(this.http);
-    console.info("Traer local"+ this.servicio);
+  constructor( private route: ActivatedRoute, private router: Router,private servicio: JugadoresService)
+  { 
     this.jugador = new Jugador();
+    console.info(this.jugador);
     this.existe = false;
     this.patternMail = new RegExp('^[a-z0-9|*|_|-|$|&]+[@][a-z0-9]+[.][a-z]{2,3}','i');
     this.patternClave = new RegExp('^[a-z0-9]+[*|@|_|-|$|&]+', 'i');
@@ -47,7 +46,7 @@ export class RegistroComponent implements OnInit {
   existeJugador(jugador: Jugador) : boolean
   {
     if(this.servicio.traerLocal().find( datos => {
-      return datos.email === this.jugador.email && datos.clave === this.jugador.clave;
+      return datos.email == this.jugador.email && datos.clave == this.jugador.clave;
       }))
     {
       return true;
@@ -84,8 +83,9 @@ export class RegistroComponent implements OnInit {
         this.jugador.pais = '';
         this.jugador.jugados = 0;
         this.jugador.perdidos = 0;
-        this.servicio.guardarLocal(this.jugador);
+        this.servicio.guardar(this.jugador);
         this.existe = false;
+        this.servicio.getJugadores();
         this.router.navigate(['/Principal']);
       }
     }
