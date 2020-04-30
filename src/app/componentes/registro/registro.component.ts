@@ -38,9 +38,9 @@ export class RegistroComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.onload = function() {
-      const myInput = document.getElementById('clave-repeat').oncopy = (e) => e.preventDefault();
-     }
+    // window.onload = function() {
+    //   const myInput = document.getElementById('clave-repeat').oncopy = (e) => e.preventDefault();
+    //  }
   }
 
   existeJugador(jugador: Jugador) : boolean
@@ -86,7 +86,7 @@ export class RegistroComponent implements OnInit {
         this.servicio.guardar(this.jugador);
         this.existe = false;
         this.servicio.getJugadores();
-        this.router.navigate(['/']);
+        this.router.navigate(['/Principal']);
       }
     }
     else{
