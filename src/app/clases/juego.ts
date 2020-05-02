@@ -5,6 +5,7 @@ export abstract class Juego {
   public jugador: string;
   public gano: boolean = false;
   public mejorPuntaje : Jugador;
+  public mayorPuntaje : number = 0;
 
   constructor(nombre?: string, gano?: boolean,jugador?:string) {
     if (nombre)

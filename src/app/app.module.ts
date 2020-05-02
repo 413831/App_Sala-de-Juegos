@@ -56,6 +56,7 @@ import { SexoPipe } from './pipes/sexo.pipe';
 import { PiedraPapelTijeraComponent } from './componentes/piedra-papel-tijera/piedra-papel-tijera.component';
 
 import { firebase } from '../firebase/firebase';
+import { MataAlVirusComponent } from './componentes/mata-al-virus/mata-al-virus.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { firebase } from '../firebase/firebase';
     JugadoresListadoComponent,
     InputJugadoresComponent,
     SexoPipe,
-    PiedraPapelTijeraComponent
+    PiedraPapelTijeraComponent,
+    MataAlVirusComponent
   ],
   imports: [
     BrowserModule,

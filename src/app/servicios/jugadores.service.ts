@@ -4,6 +4,7 @@ import { ArchivosJugadoresService } from './archivos-jugadores.service';
 import { HttpClient } from '@angular/common/http';
 import { Jugador } from '../clases/jugador';
 import { environment } from '../../environments/environment';
+import * as firebase from 'firebase';
 
 @Injectable()
 export class JugadoresService {
@@ -30,6 +31,10 @@ export class JugadoresService {
     this.jugadores.push(jugador);
     localStorage.setItem("archivoJugadores", JSON.stringify(this.jugadores));
     this.postJugador(jugador);
+  }
+
+  public update(jugador: Jugador){
+    firebase.database().ref('archivoJugadores/')
   }
 
   public iniciarSesion(jugador: Jugador) {

@@ -15,6 +15,7 @@ export class Jugador {
         return jugador;
     }
 
+    id: string ;
     nombre: string;
     email: string;
     clave: string;

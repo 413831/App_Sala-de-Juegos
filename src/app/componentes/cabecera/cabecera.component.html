@@ -7,9 +7,17 @@
       <a  routerLink="/QuienSoy"><button class="btn btn-lg btn-outline btn-dark">Quien Soy? <i class="fa fa-user"></i></button></a>
   </div>
   <ul class="nav navbar-nav navbar-right">
-          <li><a routerLink="/Registro"><span class="glyphicon glyphicon-user"></span>
-            <button type="button" name="btnRegistrar" class="btn btn-secondary">Registrarse</button></a></li>
-          <li><a  routerLink="/Login"><span class="glyphicon glyphicon-log-in"></span>
-            <button type="button" name="btnIngresar" class="btn btn-secondary">Ingresar</button></a></li>
+      <div *ngIf='!sesionIniciada'>
+        <li><a routerLink="/Registro">
+            <button type="button" name="btnRegistrar" class="btn btn-secondary">
+              <i class="fa fa-user"></i> Registrarse</button></a></li>
+        <li><a  routerLink="/Login">
+            <button type="button" name="btnIngresar" class="btn btn-secondary">
+              <i class="fa fa-user"></i>Ingresar</button></a></li>
+      </div>    
+      <div *ngIf='sesionIniciada'>
+        <button type="button" name="btnIngresar" class="btn btn-secondary" (click)='cerrarSesion()'>Salir</button>
+      </div>
   </ul>
+  
 </div>

@@ -7,5 +7,7 @@ export const environment = {
   production: false,
   database: 'https://tp-sala-de-juegos-labiv.firebaseio.com/',
   jugadores: 'archivoJugadores.json',
-  juegos: 'archivoJuegos.json'
+  juegos: 'archivoJuegos.json',
+  palabras: ['tomate','zanahoria','vehiculo','persona','episcopal','vasija','palindromo',
+          'elefante']
 };

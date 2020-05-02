@@ -46,9 +46,7 @@ export class AdivinaElNumeroComponent implements OnInit {
     {
       this.MostarMensaje("Sos un Genio!!!", true);
       this.nuevoJuego.numeroSecreto = 0;
-
       this.jugador.ganados += 1;
-      this.nuevoJuego.gano = true;
       this.enviarJuego.emit(this.nuevoJuego);
       this.juegosService.guardar(this.nuevoJuego);
     }
@@ -65,41 +63,48 @@ export class AdivinaElNumeroComponent implements OnInit {
     }
     else 
     {
-      let mensaje: string;
-      switch (this.contador) {
-        case 1:
-          mensaje = "No, intento fallido, animo";
-          this.vida = 90;
-          break;
-        case 2:
-          mensaje = "No,Te estaras Acercando???";
-          this.vida = 80;
-          break;
-        case 3:
-          mensaje = "No es, Yo crei que la tercera era la vencida.";
-          this.vida = 70;
-          break;
-        case 4:
-          mensaje = "No era el  " + this.nuevoJuego.numeroIngresado;
-          this.vida = 55;
-          break;
-        case 5:
-          mensaje = " intentos y nada.";
-          this.vida = 45;
-          break;
-        case 6:
-          mensaje = "Afortunado en el amor";
-          this.vida = 25;
-          break;
-        default:
-          mensaje = "Ya le erraste " + this.contador + " veces";
-          this.vida = 10;
-          break;
-      }
+      let mensaje: string = this.disminuirVida(this.contador);
+      
       this.MostarMensaje("#" + this.contador + " " + mensaje + " ayuda :" + this.nuevoJuego.retornarAyuda());
     }
     console.info("numero Secreto:", this.nuevoJuego.gano);
     this.miJugadoresServicio.actualizarActual(this.jugador);
+  }
+
+  disminuirVida(contador: number){
+    let mensaje;
+
+    switch (contador) {
+      case 1:
+        mensaje = "No, intento fallido, animo";
+        this.vida = 90;
+        break;
+      case 2:
+        mensaje = "No,Te estaras Acercando???";
+        this.vida = 80;
+        break;
+      case 3:
+        mensaje = "No es, Yo crei que la tercera era la vencida.";
+        this.vida = 70;
+        break;
+      case 4:
+        mensaje = "No era el  " + this.nuevoJuego.numeroIngresado;
+        this.vida = 55;
+        break;
+      case 5:
+        mensaje = " intentos y nada.";
+        this.vida = 45;
+        break;
+      case 6:
+        mensaje = "Afortunado en el amor";
+        this.vida = 25;
+        break;
+      default:
+        mensaje = "Ya le erraste " + this.contador + " veces";
+        this.vida = 10;
+        break;
+    }
+    return mensaje;
   }
 
   MostarMensaje(mensaje: string = "este es el mensaje", ganador: boolean = false)
