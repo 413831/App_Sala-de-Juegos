@@ -41,7 +41,6 @@ export class MataAlVirusComponent implements OnInit {
   {
     this.nuevoJuego.nivel = 0;
     this.nuevoJuego.puntos = 0;  
-    this.nuevoJuego.posicion = 0;
     this.jugar();
   }
 
@@ -59,6 +58,7 @@ export class MataAlVirusComponent implements OnInit {
         if(this.tiempo==0) {
           this.nuevoJuego.finTurno = true;  
           this.jugador.perdidos += 1;    
+          this.nuevoJuego.posicion = 0;
           clearInterval(this.tiempoTotal);
           this.tiempo=20;
         }
