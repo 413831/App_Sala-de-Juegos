@@ -41,6 +41,8 @@ export class MataAlVirusComponent implements OnInit {
   {
     this.nuevoJuego.nivel = 0;
     this.nuevoJuego.puntos = 0;  
+    this.nuevoJuego.posicion = 0;
+    this.jugar();
   }
 
   iniciar(){

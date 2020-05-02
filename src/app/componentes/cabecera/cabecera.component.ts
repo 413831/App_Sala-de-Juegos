@@ -18,7 +18,7 @@ export class CabeceraComponent implements OnInit {
   }
 
   checkSesion(){
-    if(localStorage.getItem('jugadorActual'))
+    if(JSON.parse(localStorage.getItem('jugadorActual')).nombre)
     {
       this.sesionIniciada = true;
     }
