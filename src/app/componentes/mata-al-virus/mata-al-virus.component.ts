@@ -39,7 +39,6 @@ export class MataAlVirusComponent implements OnInit {
 
   reiniciar()
   {
-    this.nuevoJuego.nivel = 0;
     this.nuevoJuego.puntos = 0;  
     this.jugar();
   }
@@ -65,9 +64,8 @@ export class MataAlVirusComponent implements OnInit {
       }, 900 - this.nuevoJuego.velocidad);  
   }
 
-  atacar(posicion: number){
-    this.nuevoJuego.botonPresionado = posicion;
-    this.nuevoJuego.ataque();
+  atacar(botonPresionado: number){
+    this.nuevoJuego.ataque(botonPresionado);
     this.verificar();
   }
 

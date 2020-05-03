@@ -15,16 +15,17 @@ export class MataVirus extends Juego{
     }
 
     public verificar(): boolean {
-        if(this.puntos === this.puntosObjetivo && !this.finTurno){
+        if(this.puntos === this.puntosObjetivo || this.puntos > this.puntosObjetivo 
+            && !this.finTurno){
             return this.gano = true;
         }        
         return this.gano = false;        
     }
 
-    public ataque()
+    public ataque(botonPresionado: number)
     {
-        console.info("Presionado" + this.botonPresionado);
-        if(this.botonPresionado == this.posicion){
+        console.info("Presionado" + botonPresionado);
+        if(botonPresionado == this.posicion){
             
             this.puntos += 100;
         }
