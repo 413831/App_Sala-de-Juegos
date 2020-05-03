@@ -10,7 +10,7 @@ export class JuegoAnagrama extends Juego {
     constructor(nombre?: string, gano?: boolean, jugador?:string) 
     {
         super("Agilidad con aritmetica",gano,jugador);        
-        
+        this.generar();
     }
   
     public verificar(): boolean {

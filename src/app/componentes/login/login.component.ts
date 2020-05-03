@@ -13,8 +13,6 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  private http: HttpClient;
-  private servicio: JugadoresService;
   private subscription: Subscription;
   public jugador: Jugador;
   progreso: number;
@@ -24,8 +22,9 @@ export class LoginComponent implements OnInit {
 
   clase="progress-bar progress-bar-info progress-bar-striped ";
 
-  constructor( private route: ActivatedRoute, private router: Router) {
-      this.servicio = new JugadoresService(this.http);
+  constructor( private route: ActivatedRoute, private router: Router,
+    private servicio: JugadoresService) {
+     
       this.jugador = new Jugador();
       this.progreso = 0;
       this.ProgresoDeAncho="0%";
@@ -37,8 +36,7 @@ export class LoginComponent implements OnInit {
   Entrar() {
     let jugador = this.existeJugador(this.jugador);
 
-    if(jugador  || 
-      (this.jugador.email === 'admin' && this.jugador.clave === 'admin'))
+    if(jugador || (this.jugador.email === 'admin' && this.jugador.clave === 'admin'))
     {
       console.info("Sesion iniciada");
       this.servicio.iniciarSesion(jugador);

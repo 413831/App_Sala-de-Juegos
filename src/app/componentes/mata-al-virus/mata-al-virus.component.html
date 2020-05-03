@@ -92,12 +92,23 @@
                     <p class="card-text">Jugador: {{jugador.nombre}}</p>
                     <p class="card-text">Puntaje: {{nuevoJuego.puntos}}</p>
                     <p class="card-text">Mayor puntaje: {{nuevoJuego.mayorPuntaje}}</p>
+                    <div *ngIf='nuevoJuego.nivel == 1'>
+                        <a href=""><button class="btn-lg btn-outline-dark"  data-toggle="modal" data-target="#premio">
+                            <i class="fa fa-smile"></i> PREMIO <i class="fa fa-smile"></i></button></a>
+                    </div>
+                </div>
+                <div *ngIf='nuevoJuego.mayorPuntaje >= 10000' class="card-footer">
+                    <span class="badge badge-warning"><i class="fa fa-star"></i></span>
+                    <span *ngIf='nuevoJuego.mayorPuntaje >= 20000' class="badge badge-warning"><i class="fa fa-star"></i></span>
+                    <span *ngIf='nuevoJuego.mayorPuntaje >= 30000' class="badge badge-warning"><i class="fa fa-star"></i></span>
+                    <span *ngIf='nuevoJuego.mayorPuntaje >= 40000' class="badge badge-warning"><i class="fa fa-star"></i></span>
+                    <span *ngIf='nuevoJuego.mayorPuntaje >= 50000' class="badge badge-warning"><i class="fa fa-star"></i></span>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<!-- Pantalla inicio -->
 <div class="jumbotron jumbotron-fluid shadow-lg p-3 rounded" style="background-color: rebeccapurple;" *ngIf='!enJuego'>
     <div class="container">
         <div class="row d-flex justify-content-around text-white">
@@ -124,3 +135,22 @@
 
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="premio" tabindex="-1" role="dialog" aria-labelledby="premio" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">¡Felicitaciones!</h5>
+        </div>
+        <div class="modal-body">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" [src]="safe" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Gracias</button>
+        </div>
+      </div>
+    </div>
+  </div>

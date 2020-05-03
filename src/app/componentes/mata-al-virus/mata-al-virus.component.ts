@@ -4,6 +4,7 @@ import { JuegoServiceService } from '../../servicios/juego-service.service';
 import { MataVirus } from '../../clases/juego-virus';
 import { Jugador } from '../../clases/jugador';
 import { timeoutWith } from 'rxjs/operators';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-mata-al-virus',
@@ -18,12 +19,16 @@ export class MataAlVirusComponent implements OnInit {
   tiempo: number;
   tiempoTotal:any;
   enJuego: Boolean;
+  safe: any;
 
-  constructor(private miJugadoresServicio: JugadoresService, 
-    private juegoService: JuegoServiceService) { }
+  constructor(private servicioJugadores: JugadoresService, 
+    private juegoService: JuegoServiceService,
+    private _sanitizer: DomSanitizer) {
+      this.setPremio("https://www.youtube.com/embed/i_cVJgIz_Cs");
+    }
 
   ngOnInit(): void {
-    this.jugador = this.miJugadoresServicio.traerActual();
+    this.jugador = this.servicioJugadores.traerActual();
     this.nuevoJuego = new MataVirus();
     this.nuevoJuego.jugador = this.jugador.nombre;
   }
@@ -31,10 +36,10 @@ export class MataAlVirusComponent implements OnInit {
   jugar(){
     this.enJuego = true;
     this.nuevoJuego.subirNivel();
-    this.jugador.jugados += 1;
     this.tiempo = 20;
     this.iniciar();
-    this.guardarDatos();
+    this.jugador.jugados += 1;
+    this.guardar();
   }
 
   reiniciar()
@@ -80,8 +85,13 @@ export class MataAlVirusComponent implements OnInit {
     return false;
   }
 
-  guardarDatos(){
-    this.miJugadoresServicio.guardar(this.jugador);
+  guardar(){
+    this.servicioJugadores.update(this.jugador);
     this.enviarJuego.emit(this.nuevoJuego);
+  }
+
+  setPremio(videoURL: string){
+
+    this.safe = this._sanitizer.bypassSecurityTrustResourceUrl(videoURL);
   }
 }

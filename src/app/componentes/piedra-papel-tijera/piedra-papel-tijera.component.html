@@ -1,51 +1,65 @@
-<div class="container bg-danger border-success rounded-pill">
-    <div class="row bg-danger border border-success rounded-pill">
-        <div class="col d-flex justify-content-center">
-            <button class="btn btn-warning border-success rounded-pill">
-                <img class="imagenJuego" src="/assets/imagenes/piedra.jpg" (click)='eligePiedra()'>
-            </button>
+<div class="jumbotron jumbotron-fluid">
+    <h1> <i class="fa fa-gamepad"></i> Piedra, papel o tijera <i class="fa fa-gamepad"></i></h1>
+    <div class="container border-success text-light">
+        <div class="row  mt-5">
+            <div class="col d-flex justify-content-center">
+                <button class="btn btn-warning border-dark w-3" (click)='eligePiedra()'>
+                    <h1 class="display-3"> <i class="fa fa-circle"></i> </h1>                   
+                </button>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <button class="btn btn-warning border-dark w-3" (click)='eligePapel()'>
+                    <h1 class="display-3"> <i class="fa fa-paper-plane"></i></h1>                  
+                </button>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <button class="btn btn-warning border-dark w-3" (click)='eligeTijera()'>
+                    <h1 class="display-3"> <i class="fa fa-scissors"></i></h1>                  
+                </button>
+            </div>
         </div>
-        <div class="col d-flex justify-content-center">
-            <button class="btn btn-warning border-success rounded-pill">
-                <img class="imagenJuego" src="/assets/imagenes/papel.jpg" (click)='eligePapel()'>
-            </button>
-        </div>
-        <div class="col d-flex justify-content-center">
-            <button class="btn btn-warning border-dark rounded-pill">
-                <img class="imagenJuego" src="/assets/imagenes/tijera.jpg" (click)='eligeTijera()'>
-            </button>
-        </div>
-    </div>
-    <div class="row border border-dark rounded-pill">
-        <div class="col d-flex justify-content-center">
-            <div *ngIf='finJuego'>
-                <div *ngIf='nuevoJuego.gano'>
-                    <h1><span class="badge badge-success">{{jugador.nombre}} GANASTE! </span></h1>
-                </div>
-                <div *ngIf='!nuevoJuego.gano'>
-                    <h1><span class="badge badge-secondary">{{jugador.nombre}} Perdiste... </span></h1>
-                </div>
-                <div *ngIf='empate'>
-                    <h1><span class="badge badge-warning">{{jugador.nombre}} Empataste </span></h1>
-                </div>
-                <div>
-                    <h1><button class="btn-lg btn-warning btn-block" (click)='finJuego = !finJuego'>Jugar de nuevo</button></h1>
+        <div class="row p-5">
+            <div class="col d-flex justify-content-center">
+                <div *ngIf='finJuego'>
+                    <div *ngIf='nuevoJuego.gano'>
+                        <h1><span class="badge badge-success">{{jugador.nombre}} GANASTE! </span></h1>
+                    </div>
+                    <div *ngIf='!nuevoJuego.gano && !empate'>
+                        <h1><span class="badge badge-secondary">{{jugador.nombre}} Perdiste... </span></h1>
+                    </div>
+                    <div *ngIf='empate'>
+                        <h1><span class="badge badge-warning">{{jugador.nombre}} Empataste </span></h1>
+                    </div>
+                    <div>
+                        <h1><button class="btn-lg btn-warning btn-block" (click)='finJuego = !finJuego'>Jugar de
+                                nuevo</button></h1>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row border border-dark rounded-pill">
-        <div class="col d-flex justify-content-center">
-            <img class="imagenJuego" [hidden]='finJuego' src="/assets/imagenes/incognita.jpg" alt="">
-            <div [hidden]='!finJuego'>
-                <div *ngIf='nuevoJuego.opcionRival === 1'>
-                    <img class="imagenJuego" src="/assets/imagenes/piedra.jpg">
+        <div class="row border border-dark rounded-pill">
+            <div class="col d-flex justify-content-center">
+                <div  [hidden]='finJuego'>
+                    <button class="btn btn-warning border-dark w-3" disabled>
+                        <h1 class="display-3"> <i class="fa fa-question"></i> </h1>
+                    </button>              
                 </div>
-                <div *ngIf='nuevoJuego.opcionRival === 2'>
-                    <img class="imagenJuego" src="/assets/imagenes/papel.jpg">
-                </div>
-                <div *ngIf='nuevoJuego.opcionRival === 3'>
-                    <img class="imagenJuego" src="/assets/imagenes/tijera.jpg">
+                <div [hidden]='!finJuego'>
+                    <div *ngIf='nuevoJuego.opcionRival === 1'>
+                        <button class="btn btn-warning border-dark w-3" disabled>
+                            <h1 class="display-3"> <i class="fa fa-circle"></i> </h1>                          
+                        </button>
+                    </div>
+                    <div *ngIf='nuevoJuego.opcionRival === 2'>
+                        <button class="btn btn-warning border-dark w-3" disabled>
+                            <h1 class="display-3"> <i class="fa fa-paper-plane"></i></h1>                           
+                        </button>
+                    </div>
+                    <div *ngIf='nuevoJuego.opcionRival === 3'>
+                        <button class="btn btn-warning border-dark w-3" disabled>
+                            <h1 class="display-3"> <i class="fa fa-scissors"></i></h1>                            
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

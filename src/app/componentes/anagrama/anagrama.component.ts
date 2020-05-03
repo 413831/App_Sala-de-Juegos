@@ -17,6 +17,7 @@ export class AnagramaComponent implements OnInit {
   contador: number;
   ocultarVerificar: boolean;
   vida: number;
+  finJuego: boolean;
 
   constructor(private miJugadoresServicio: JugadoresService, 
     private juegosService: JuegoServiceService) { }
@@ -25,6 +26,15 @@ export class AnagramaComponent implements OnInit {
     this.jugador = this.miJugadoresServicio.traerActual();
     this.nuevoJuego = new JuegoAnagrama();
     this.nuevoJuego.jugador = this.jugador.nombre;
+    this.finJuego = false;
+    this.ocultarVerificar = false;
+
+  }
+
+  jugar(){
+    this.nuevoJuego = new JuegoAnagrama();
+    this.nuevoJuego.jugador = this.jugador.nombre;
+    this.finJuego = false;
     this.ocultarVerificar = false;
   }
 
@@ -34,14 +44,16 @@ export class AnagramaComponent implements OnInit {
 
     if (this.nuevoJuego.verificar()) 
     {
-      this.jugador.ganados += 1;
+      this.finJuego = true;
+      this.jugador.ganados += 1;      
       this.enviarJuego.emit(this.nuevoJuego);
       this.juegosService.guardar(this.nuevoJuego);
+
     }
     else if(this.contador === 10)
     {
       this.vida = 0;
-
+      this.finJuego = true;
       this.jugador.perdidos += 1;
       this.nuevoJuego.gano = false;
       this.enviarJuego.emit(this.nuevoJuego);
@@ -49,8 +61,7 @@ export class AnagramaComponent implements OnInit {
     }
     else 
     {
-      let mensaje: string;
-      
+      this.finJuego = true;
       this.disminuirVida(this.contador);
      
     }

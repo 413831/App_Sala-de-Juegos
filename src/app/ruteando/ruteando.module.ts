@@ -24,6 +24,7 @@ import { JugadoresListadoComponent } from '../componentes/jugadores-listado/juga
 import { PiedraPapelTijeraComponent } from '../componentes/piedra-papel-tijera/piedra-papel-tijera.component';
 import { MataAlVirusComponent } from '../componentes/mata-al-virus/mata-al-virus.component';
 import { AnagramaComponent } from '../componentes/anagrama/anagrama.component';
+import { TaTeTiComponent } from '../componentes/ta-te-ti/ta-te-ti.component';
 
 
 // declaro donde quiero que se dirija
@@ -47,6 +48,7 @@ children:
       {path: 'AgilidadaMasListado' , component: AgilidadMasListadoComponent},
       {path: 'Agilidad' , component: AgilidadAritmeticaComponent},
       {path: 'Anagrama' , component: AnagramaComponent},
+      {path: 'Ta-te-ti' , component: TaTeTiComponent},
       {path: 'PPT' , component: PiedraPapelTijeraComponent},
       {path: 'MataVirus' , component: MataAlVirusComponent}
     ]

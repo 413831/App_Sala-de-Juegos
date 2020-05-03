@@ -19,7 +19,7 @@ export class JugadoresListadoComponent implements OnInit {
 
   TraerTodos() {
     console.info("Traer todos");
-    // this.miJugadoresServicio.getJugadores('archivoJugadores.json')
+    // this.miJugadoresServicio.getJugadores('jugadores.json')
     //                         .subscribe((response: Jugador[]) => {
     //   console.info("jugadores service", response);
     //     this.jugadores = response;     
@@ -31,7 +31,7 @@ export class JugadoresListadoComponent implements OnInit {
   }
   TraerGanadores() {
     console.info("Traer ganadores");
-    // this.miJugadoresServicio.getJugadores('archivoJugadores.json')
+    // this.miJugadoresServicio.getJugadores('jugadores.json')
     //                         .subscribe((response: Jugador[]) => {
     //   console.info("jugadores service", response);
     //    this.jugadores = response.filter( jugador => jugador.ganados > jugador.perdidos);                 
@@ -40,7 +40,7 @@ export class JugadoresListadoComponent implements OnInit {
   }
   TraerPerdedores() {
     console.info("Traer perdedores");
-    // this.miJugadoresServicio.getJugadores('archivoJugadores.json')
+    // this.miJugadoresServicio.getJugadores('jugadores.json')
     //                         .subscribe((response: Jugador[]) => {
     //   console.info("jugadores service", response);
     //    this.jugadores = response.filter( jugador => jugador.ganados < jugador.perdidos);                   

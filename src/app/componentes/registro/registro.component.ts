@@ -26,7 +26,8 @@ export class RegistroComponent implements OnInit {
   formRegistro:FormGroup=this.miConstructor.group({
     usuario:this.email
   });*/
-  constructor( private route: ActivatedRoute, private router: Router,private servicio: JugadoresService)
+  constructor( private route: ActivatedRoute, private router: Router,
+    private servicio: JugadoresService)
   { 
     this.jugador = new Jugador();
     console.info(this.jugador);
@@ -43,7 +44,7 @@ export class RegistroComponent implements OnInit {
     //  }
   }
 
-  existeJugador(jugador: Jugador) : boolean
+  existeJugador() : boolean
   {
     if(this.servicio.traerLocal().find( datos => {
       return datos.email == this.jugador.email && datos.clave == this.jugador.clave;
@@ -70,12 +71,13 @@ export class RegistroComponent implements OnInit {
   {
     this.patternInvalido = false;
 
-    if(this.existeJugador(this.jugador))
+    if(this.existeJugador())
     {
       this.existe = true;
       console.info("Ya existe");
     }
-    else if(this.patternMail.test(this.jugador.email) && this.patternClave.test(this.jugador.clave))
+    else if(this.patternMail.test(this.jugador.email) && 
+            this.patternClave.test(this.jugador.clave))
     {
       if(this.validarOpciones()){
         console.info("Alta de usuario");
@@ -83,9 +85,8 @@ export class RegistroComponent implements OnInit {
         this.jugador.pais = '';
         this.jugador.jugados = 0;
         this.jugador.perdidos = 0;
-        this.servicio.guardar(this.jugador);
+        this.servicio.crear(this.jugador);
         this.existe = false;
-        this.servicio.getJugadores();
         this.router.navigate(['/Principal']);
       }
     }

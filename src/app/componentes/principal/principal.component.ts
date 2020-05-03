@@ -17,10 +17,11 @@ export class PrincipalComponent implements OnInit {
 
   constructor(private jugadorService: JugadoresService, private juegoService: JuegoServiceService) {
     // Set local storage 
-    if(!localStorage.getItem("archivoJugadores"))
-    {
-      this.jugadorService.getJugadores();
-    }
+    // TEST
+    //this.jugadorService.test();
+
+    this.jugadorService.fetchAll();
+
 
     if(!localStorage.getItem("info-juegos"))
     {

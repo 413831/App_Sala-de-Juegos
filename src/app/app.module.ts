@@ -55,8 +55,8 @@ import { InputJugadoresComponent } from './componentes/input-jugadores/input-jug
 import { SexoPipe } from './pipes/sexo.pipe';
 import { PiedraPapelTijeraComponent } from './componentes/piedra-papel-tijera/piedra-papel-tijera.component';
 
-import { firebase } from '../firebase/firebase';
 import { MataAlVirusComponent } from './componentes/mata-al-virus/mata-al-virus.component';
+import { TaTeTiComponent } from './componentes/ta-te-ti/ta-te-ti.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +84,8 @@ import { MataAlVirusComponent } from './componentes/mata-al-virus/mata-al-virus.
     InputJugadoresComponent,
     SexoPipe,
     PiedraPapelTijeraComponent,
-    MataAlVirusComponent
+    MataAlVirusComponent,
+    TaTeTiComponent
   ],
   imports: [
     BrowserModule,
