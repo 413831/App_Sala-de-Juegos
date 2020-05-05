@@ -40,6 +40,8 @@ export class RegistroComponent implements OnInit {
     this.checkTerminos = true;
   }
 
+  ngOnD
+
   ngOnInit() {
     // window.onload = function() {
     //   const myInput = document.getElementById('clave-repeat').oncopy = (e) => e.preventDefault();
@@ -96,5 +98,9 @@ export class RegistroComponent implements OnInit {
       this.patternInvalido = true;
       console.info("No paso la validacion");
     }
+  }
+
+  volver(){
+    this.router.navigate(['/Principal']);
   }
 }
