@@ -1,0 +1,17 @@
+.imagenFondo{
+    max-width: 400px;
+    max-height: 400px;
+    background-color: rebeccapurple;
+}
+
+.imagenDummy{
+    width: 200px;
+    height: 200px;
+    background-color: transparent;
+}
+
+.imagenVirus{
+    max-width: 220px;
+    max-height: 220px;
+    background-color: transparent;
+}

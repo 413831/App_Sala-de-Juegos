@@ -1,0 +1,60 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<!--app-menu></app-menu-->
+<!-- index.html -->
+<div class="jumbotron jumbotron-fluid">
+  <h1><i class="fa fa-gamepad"></i> Agilidad aritmetica <i class="fa fa-gamepad"></i></h1>
+  <p>Acierta al resultado de la cuenta matemática</p>
+  <div class="container bg-transparent p-3">
+    <div class="col-lg-6 offset-lg-3" name="juego">
+      <div class="row d-flex justify-content-center">
+        <div class="form-group bg-dark  p-4 rounded-lg">
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><b>Primer número: </b></span>
+            </div>
+            <input type="text" class="form-control" style="width:20px;" placeholder="{{nuevoJuego.primerNumero}}"
+              readonly />
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><b>Operador: </b></span>
+            </div>
+            <input type="text" class="form-control" style="width:20px;" placeholder="{{nuevoJuego.operador}}"
+              readonly />
+          </div>
+          <div class="input-group mb-3 ">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><b>Segundo número: </b></span>
+            </div>
+            <input type="text" class="form-control" style="width:10px;" placeholder="{{nuevoJuego.segundoNumero}}"
+              readonly />
+          </div>
+          <div class="input-group mb-">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><b>Respuesta: </b></span>
+            </div>
+            <input [(ngModel)]="nuevoJuego.numeroIngresado" placeholder="ingrese numero" name="numeroIngresado"
+              type="text" class="form-control" style="width:10px;" />
+          </div>
+
+
+          <h2 [hidden]="ocultarVerificar"><button (click)="verificar()" class="btn btn-success btn-lg mt-4">Verificar
+              {{Tiempo}} </button></h2>
+          <h2 [hidden]="!ocultarVerificar"><button (click)="NuevoJuego()" class="btn btn-info btn-lg mt-4">Nuevo</button>
+          </h2>
+          <div *ngIf="!ocultarVerificar">
+            <h2>
+              <p><img src="./assets/imagenes/waiting.gif" alt="esperando"></p>
+            </h2>
+          </div>
+          <div *ngIf='jugo'>
+            <h3 [hidden]="!gano">{{mensaje}} -> Resultado: {{nuevoJuego.resultado}}</h3>
+            <h3 [hidden]="gano">{{mensaje}} -> Resultado: {{nuevoJuego.resultado}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

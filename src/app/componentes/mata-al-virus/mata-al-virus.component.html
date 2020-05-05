@@ -1,0 +1,155 @@
+<div class="container container-fluid vh-100" style="background-color: indigo;" *ngIf='enJuego'>
+    <div class="row d-flex ">        
+        <div class="col">
+            <div class="row d-flex justify-content-around text-center">
+                <div class="col">
+                    <div *ngIf='nuevoJuego.posicion == 1'>
+                        <button class="btn-lg btn-outline-dark shadow-lg bg-transparent rounded" (click)='atacar(1)'>
+                            <img class="img-fluid rounded mx-auto d-block imagenVirus" src="../../../assets/imagenes/virusito.gif"
+                                alt="">
+                        </button>
+                    </div>
+                    <div *ngIf='nuevoJuego.posicion != 1'>
+                        <img src="../../../assets/imagenes/dummy-1.png" class="img-fluid imagenDummy rounded w-10"
+                            alt="">
+                    </div>
+                </div>
+                <div class="col">
+                    <div *ngIf='nuevoJuego.posicion == 2'>
+                        <button class="btn-lg btn-outline-dark shadow-lg  bg-transparent rounded" (click)='atacar(2)'>
+                            <img class="img-fluid rounded imagenVirus" src="../../../assets/imagenes/virusito.gif"
+                                alt="">
+                        </button>
+                    </div>
+                    <div *ngIf='nuevoJuego.posicion != 2'>
+                        <img src="../../../assets/imagenes/dummy-2.png" class="img-fluid imagenDummy rounded w-10"
+                            alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-around text-center">
+                <div class="col">
+                    <div *ngIf='nuevoJuego.posicion == 3'>
+                        <button class="btn-lg btn-outline-dark shadow-lg p-3 mb-5 bg-transparent rounded"
+                            (click)='atacar(3)'>
+                            <img class="img-fluid rounded imagenVirus" src="../../../assets/imagenes/virusito.gif"
+                                alt="">
+                        </button>
+                    </div>
+                    <div *ngIf='nuevoJuego.posicion != 3'>
+                        <img src="../../../assets/imagenes/dummy-1.png" class="img-fluid imagenDummy rounded w-10"
+                            alt="">
+                    </div>
+                </div>
+                <div class="col">
+                    <div *ngIf='nuevoJuego.posicion == 4'>
+                        <button class="btn-lg btn-outline-dark shadow-lg p-3 mb-5 bg-transparent rounded"
+                            (click)='atacar(4)'>
+                            <img class="img-fluid rounded imagenVirus" src="../../../assets/imagenes/virusito.gif"
+                                alt="">
+                        </button>
+                    </div>
+                    <div *ngIf='nuevoJuego.posicion != 4'>
+                        <img src="../../../assets/imagenes/dummy-2.png" class="img-fluid imagenDummy rounded w-10"
+                            alt="">
+                    </div>
+                </div>
+                <div class="col">
+                    <div *ngIf='nuevoJuego.posicion == 5'>
+                        <button class="btn-lg btn-outline-dark shadow-lg p-3 mb-5 bg-transparent rounded" (click)='atacar(5)'>
+                            <img class="img-fluid rounded imagenVirus" src="../../../assets/imagenes/virusito.gif"
+                                alt="">
+                        </button>
+                    </div>
+                    <div *ngIf='nuevoJuego.posicion != 5'>
+                        <img src="../../../assets/imagenes/dummy-1.png" class="img-fluid imagenDummy rounded w-10"
+                            alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="container m-5" *ngIf='nuevoJuego.finTurno'>
+                <div *ngIf='nuevoJuego.gano'>
+                    <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading">Buenardo!</h4>
+                        <button class="btn-lg btn-success btn-block" (click)='jugar()'>Siguiente nivel</button>
+                    </div>
+                </div>
+                <div *ngIf='!nuevoJuego.gano'>
+                    <div class="alert alert-secondary" role="alert">
+                        <h4 class="alert-heading">Malardo...</h4>
+                        <button class="btn-lg btn-secondary btn-block" (click)='reiniciar()'>Re-intentar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card bg-light mb-3 d-flex justify-content-center" style="max-width: 18rem;">
+                <div class="card-header">
+                    <h2>Tiempo: {{tiempo}}</h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Nivel: {{nuevoJuego.nivel}}</h5>
+                    <p class="card-text">Jugador: {{jugador.nombre}}</p>
+                    <p class="card-text">Puntaje: {{nuevoJuego.puntos}}</p>
+                    <p class="card-text">Mayor puntaje: {{nuevoJuego.mayorPuntaje}}</p>
+                    <div *ngIf='nuevoJuego.nivel == 25'>
+                       <button class="btn-lg btn-outline-dark"  data-toggle="modal" data-target="#premio">
+                            <i class="fa fa-smile-o"></i> PREMIO <i class="fa fa-smile-o"></i></button>
+                           
+                    </div>
+                </div>
+                <div *ngIf='nuevoJuego.mayorPuntaje >= 10000' class="card-footer">
+                    <span class="badge badge-warning"><i class="fa fa-star"></i></span>
+                    <span *ngIf='nuevoJuego.mayorPuntaje >= 20000' class="badge badge-warning"><i class="fa fa-star"></i></span>
+                    <span *ngIf='nuevoJuego.mayorPuntaje >= 30000' class="badge badge-warning"><i class="fa fa-star"></i></span>
+                    <span *ngIf='nuevoJuego.mayorPuntaje >= 40000' class="badge badge-warning"><i class="fa fa-star"></i></span>
+                    <span *ngIf='nuevoJuego.mayorPuntaje >= 50000' class="badge badge-warning"><i class="fa fa-star"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Pantalla inicio -->
+<div class="jumbotron jumbotron-fluid shadow-lg p-3 rounded" style="background-color: rebeccapurple;" *ngIf='!enJuego'>
+    <h1 class="text-light"><i class="fa fa-bug"></i><i> Mata al virus </i><i class="fa fa-bug"></i></h1>
+    <p class="text-light"> Golpea al virus hasta eliminarlo. Apurate que te hace mortadela.</p>
+    <div class="container">
+        <div class="row d-flex justify-content-around text-white">
+        </div>
+        <hr>
+        <div class="row d-flex justify-content-around">
+            <div class="col-sm text-center">
+                <img src="../../../assets/imagenes/virus-3.png" class="img-fluid  align-middle" alt="Responsive image">
+            </div>
+            <div class="col-sm">
+
+                <figure class="figure">
+                    <img src="../../../assets/imagenes/mata-virus.png" class="img-fluid imagenFondo mb-3"
+                        alt="Responsive image">
+                    <figcaption class="figure-caption"> <button class="btn-lg btn-success btn-block"
+                            (click)='jugar()'>Jugar</button></figcaption>
+                </figure>
+            </div>
+            <div class="col-sm text-center">
+                <img src="../../../assets/imagenes/virus-1.png" class="img-fluid " alt="Responsive image">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="premio" tabindex="-1" role="dialog" aria-labelledby="premio" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">¡Felicitaciones!</h5>
+        </div>
+        <div class="modal-body">          
+            <button class="btn-lg btn-outline-dark"><h1><a href="https://www.youtube.com/embed/i_cVJgIz_Cs">Premio</a></h1></button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Gracias</button>
+        </div>
+      </div>
+    </div>
+  </div>

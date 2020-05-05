@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+  <div class="hero-text">
+      <h1 class="display-3"><span class="badge badge-pill badge-primary">Sala de Juegos</span></h1>
+      <h3><p><span class="badge badge-primary">Alejandro Planes</span></p></h3>
+      <a href="https://github.com/413831"target="_blank"><button class="btn btn-lg btn-dark">en GitHub 
+                                                        <i class="fa fa-github"></i></button></a>
+      <a  routerLink="/QuienSoy"><button class="btn btn-lg btn-outline btn-dark">Quien Soy? <i class="fa fa-user"></i></button></a>
+  </div>
+  <ul class="nav navbar-nav navbar-right">
+      <div *ngIf='!sesionIniciada'>
+        <li><a routerLink="/Registro">
+            <button type="button" name="btnRegistrar" class="btn btn-secondary">
+              <i class="fa fa-user"></i> Registrarse</button></a></li>
+        <li><a  routerLink="/Login">
+            <button type="button" name="btnIngresar" class="btn btn-secondary">
+              <i class="fa fa-user"></i> Ingresar</button></a></li>
+      </div>    
+      <div *ngIf='sesionIniciada'>
+        <button type="button" name="btnIngresar" class="btn btn-secondary" (click)='cerrarSesion()'>Salir</button>
+      </div>
+  </ul>
+  
+</div>

@@ -1,0 +1,38 @@
+<ul class="nav nav-tabs bg-dark text-light">
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/Principal">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" (click)="TraerTodos()">Todos los jugadores</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" (click)="TraerGanadores()">Los ganadores</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" (click)="TraerPerdedores()">Los perdedores</a>
+  </li>
+</ul>
+
+<table class="table table-hover table-dark table-condensed">
+  <thead>
+    <tr>
+      <th>Alias</th>
+      <th>Email</th>
+      <th>Pais</th>
+      <th>Jugados</th>
+      <th>Ganados</th>
+      <th>Perdidos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let jugador of jugadores" >
+      <td>{{jugador.nombre}} </td>
+      <td>{{jugador.email}} </td> 
+      <td>{{jugador.pais}} </td> 
+      <td>{{jugador.jugados}} </td> 
+      <td>{{jugador.ganados}} </td> 
+      <td>{{jugador.perdidos}} </td>  
+    </tr>
+   
+  </tbody>
+</table>

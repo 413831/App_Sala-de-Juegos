@@ -1,0 +1,59 @@
+<div class="jumbotron jumbotron-fluid">
+    <h1 class="mb-5"> <b> <i class="fa fa-gamepad"></i> Ta - te - ti <i class="fa fa-gamepad"></i> </b></h1>
+    <p > Juega para formar tres lineas iguales, verticales, horizontales o diagonales. 
+        El primero que lo logra gana.</p>
+    <hr>
+    <div *ngIf='!finJuego' class="container  border-dark">
+        <div class="row">
+            <div class="col-sm m-3">
+                 <div class="btn-toolbar d-flex justify-content-center">
+                    <div class="btn-group" role="group" aria-label="First group">
+                        <button type="button" class="btn-lg btn-outline-dark " (click)='ponerFicha(0,0)'>{{tablero[0][0]}}</button>
+                        <button type="button" class="btn-lg btn-outline-dark " (click)='ponerFicha(0,1)'>{{tablero[0][1]}}</button>
+                        <button type="button" class="btn-lg btn-outline-dark " (click)='ponerFicha(0,2)'>{{tablero[0][2]}}</button>
+                    </div>
+                </div>
+                <div class="btn-toolbar d-flex justify-content-center">
+                    <div class="btn-group" role="group" aria-label="First group">
+                        <button type="button" class="btn-lg btn-outline-dark" (click)='ponerFicha(1,0)'>{{tablero[1][0]}}</button>
+                        <button type="button" class="btn-lg btn-outline-dark" (click)='ponerFicha(1,1)'>{{tablero[1][1]}}</button>
+                        <button type="button" class="btn-lg btn-outline-dark" (click)='ponerFicha(1,2)'>{{tablero[1][2]}}</button>
+                    </div>
+                </div>
+                <div class="btn-toolbar d-flex justify-content-center">
+                    <div class="btn-group" role="group" aria-label="First group">
+                        <button type="button" class="btn-lg btn-outline-dark" (click)='ponerFicha(2,0)'>{{tablero[2][0]}}</button>
+                        <button type="button" class="btn-lg btn-outline-dark" (click)='ponerFicha(2,1)'>{{tablero[2][1]}}</button>
+                        <button type="button" class="btn-lg btn-outline-dark" (click)='ponerFicha(2,2)'>{{tablero[2][2]}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm m-3 d-flex justify-content-center">
+                <div class="card bg-light mb-3 d-flex justify-content-center" style="max-width: 18rem;">
+                    <div class="card-header">
+                        <h4 class="card-text">Jugador: {{jugador.nombre}}</h4> 
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Ficha jugador: {{nuevoJuego.fichaJugador}}</p>
+                        <p class="card-text">Ficha maquina: {{nuevoJuego.fichaMaquina}}</p>
+                        <p class="card-text">Turno: {{nuevoJuego.turno}}</p>
+                        
+                    </div>
+                    <div *ngIf='nuevoJuego.ganador != 0' class="card-footer">
+                        <p *ngIf='nuevoJuego.ganador == 1' class="card-text"><b>Ganador: {{jugador.nombre}}</b></p>
+                        <p *ngIf='nuevoJuego.ganador == 2' class="card-text"><b>Ganador: Maquina</b></p>
+
+                        <button class="btn-lg btn-secondary" (click)='reset()'>Jugar de nuevo</button>
+                    </div>   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="finJuego" class=" border rounded-lg border-dark w-25 p-3 m-auto ">
+        <p>Selecciona tipo de ficha</p>
+        <div class="btn-group btn-group-lg" role="group" aria-label="elegir-ficha">
+            <button class="btn btn-outline-dark" (click)='jugar(1)'><h1><i class="fa fa-circle align-middle"></i></h1></button>
+            <button class="btn btn-outline-dark" (click)='jugar(2)'><h1><i class="fa fa-close align-middle"></i></h1></button>
+        </div>
+    </div>
+</div>
