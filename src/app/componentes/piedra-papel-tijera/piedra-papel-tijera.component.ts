@@ -42,16 +42,17 @@ export class PiedraPapelTijeraComponent implements OnInit {
   {    
     if(this.nuevoJuego.verificar())
     {
-      this.jugador.ganados += 1;
+      this.jugador.ganados++;
       this.nuevoJuego.gano = true;
     }
     else if(this.nuevoJuego.opcionIngresada === this.nuevoJuego.opcionRival)
     {
+      this.jugador.empatados++;
       this.empate = true;
     }
     else 
     {
-      this.jugador.perdidos += 1;
+      this.jugador.perdidos++;
       this.nuevoJuego.gano = false;
     }
     this.miJugadoresServicio.actualizarActual(this.jugador); 

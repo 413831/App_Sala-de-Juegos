@@ -14,7 +14,7 @@ export class Jugador {
     }
 
     public static CrearJugador(id: string, nombre?: string, email?: string, clave?: string, pais?:string,
-                             jugados?: number, ganados?: number, perdidos?: number): Jugador
+                             jugados?: number, ganados?: number, perdidos?: number, empatados?: number): Jugador
     {
         let jugador = new Jugador();
         jugador.id = id;
@@ -24,6 +24,7 @@ export class Jugador {
         jugador.pais = pais;
         jugador.jugados = jugados;
         jugador.ganados = ganados;
+        jugador.empatados = empatados;
         jugador.perdidos = perdidos;   
 
         return jugador;
@@ -37,4 +38,5 @@ export class Jugador {
     jugados: number;
     ganados: number;
     perdidos: number;
+    empatados: number;
 }

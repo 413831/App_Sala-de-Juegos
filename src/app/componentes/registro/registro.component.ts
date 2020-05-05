@@ -89,6 +89,7 @@ export class RegistroComponent implements OnInit {
         this.jugador.pais = '';
         this.jugador.jugados = 0;
         this.jugador.perdidos = 0;
+        this.jugador.empatados = 0;
         this.servicio.crear(this.jugador);
         this.existe = false;
         this.router.navigate(['/Principal']);

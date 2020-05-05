@@ -79,7 +79,7 @@ export class JugadoresService {
               var data = child.val();
               this.jugadores.push(Jugador.CrearJugador(child.key, data.nombre, data.email,
                                                       data.clave, data.pais, data.jugados,
-                                                      data.ganados, data.perdidos));
+                                                      data.ganados, data.perdidos, data.empatados));
                                                     }); 
             console.info("Jugadores: " + this.jugadores);
             console.info("JSON Jugadores: " + JSON.stringify(this.jugadores));
@@ -130,7 +130,7 @@ export class JugadoresService {
           var data = child.val();
           this.jugadores.push(Jugador.CrearJugador(child.key, data.nombre, data.email,
                                                   data.clave, data.pais, data.jugados,
-                                                  data.ganados, data.perdidos));
+                                                  data.ganados, data.perdidos, data.empatados));
         });        
         localStorage.setItem('jugadores', JSON.stringify(this.jugadores));
     })
@@ -158,7 +158,7 @@ export class JugadoresService {
     data = JSON.parse(localStorage.getItem("jugadorActual"));
 
     jugador = Jugador.CrearJugador(data.id, data.nombre, data.email, data.clave, 
-                                  data.pais, data.jugados,data.ganados, data.perdidos);
+                                  data.pais, data.jugados,data.ganados, data.perdidos, data.empatados);
     return jugador;
   }
 

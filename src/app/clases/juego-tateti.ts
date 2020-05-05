@@ -75,9 +75,9 @@ export class JuegoTateti extends Juego {
         this.turno = 0;
         this.tablero = 
         [
-            [{ocupada: false, ficha: Ficha.vacio, posicion: [0,0]},{ocupada: false, ficha: Ficha.vacio, posicion: [0,1]},{ocupada: false, ficha: Ficha.vacio, posicion: [0,2]},
-            {ocupada: false, ficha: Ficha.vacio, posicion: [1,0]},{ocupada: false, ficha: Ficha.vacio, posicion: [1,1]},{ocupada: false, ficha: Ficha.vacio, posicion: [1,2]},
-            {ocupada: false, ficha: Ficha.vacio, posicion: [2,0]},{ocupada: false, ficha: Ficha.vacio, posicion: [2,1]},{ocupada: false, ficha: Ficha.vacio, posicion: [2,2]}]
+            [{ocupada: false, ficha: Ficha.vacio, posicion: [0,0]},{ocupada: false, ficha: Ficha.vacio, posicion: [0,1]},{ocupada: false, ficha: Ficha.vacio, posicion: [0,2]}],
+            [{ocupada: false, ficha: Ficha.vacio, posicion: [1,0]},{ocupada: false, ficha: Ficha.vacio, posicion: [1,1]},{ocupada: false, ficha: Ficha.vacio, posicion: [1,2]}],
+            [{ocupada: false, ficha: Ficha.vacio, posicion: [2,0]},{ocupada: false, ficha: Ficha.vacio, posicion: [2,1]},{ocupada: false, ficha: Ficha.vacio, posicion: [2,2]}]
         ]
         this.ganador = Ganador.vacio;
         console.info("Nuevo tablero: "+ this.tablero);
@@ -137,30 +137,32 @@ export class JuegoTateti extends Juego {
         for(let linea of lineas)
         {            
             for(let celda of linea)
-            {
-                if(celda.ocupada && celda.ficha === ficha)
+            {                
+                if(celda.ocupada && celda.ficha == ficha)
                 {
                     // se cuentan las celdas ocupadas con la ficha indicada
                     contador++;
                 }
-                else
+                else if(!celda.ocupada)
                 {   
                     // se guarda la celda desocupada [x,x]
-                    posicion = celda.posicion;               
+                    posicion = celda.posicion;  
+                }             
             }
-                if(contador === 2)
-                {
-                    celdasVacias.push(posicion); // [x,x]
-                    contador = 0; 
-                }
+
+            if(contador === 2)
+            {
+                celdasVacias.push(posicion); // [x,x]
+                contador = 0; 
             }
+        
         }
         return celdasVacias;
     }
 
     public elegirCelda(){
         let celdasVacias = this.celdasParaCompletarLinea(this.fichaMaquina)
-        if(celdasVacias.length === 0){
+        if(celdasVacias.length == 0){
             celdasVacias = this.celdasParaCompletarLinea(this.fichaJugador);
         }
         return celdasVacias;
@@ -169,7 +171,7 @@ export class JuegoTateti extends Juego {
     public jugadaComputadora(){
         let posicion;
 
-        if(this.turno < 10){
+        if(this.turno <= 9){
             let celdasVacias = this.elegirCelda(); // Se buscan celdas vacias para ganar o bloquear al jugador
             if(celdasVacias.length >= 1){
                 posicion = celdasVacias[Math.floor(Math.random() * celdasVacias.length)]; 
@@ -194,12 +196,11 @@ export class JuegoTateti extends Juego {
         else if(this.tresEnLinea(this.fichaMaquina))
         {   
             this.ganador = Ganador.maquina;
-            return false
+            return true
         }
+        this.ganador = Ganador.vacio;
         return false;
     }
-
-
 }
 
 export enum Ficha{
